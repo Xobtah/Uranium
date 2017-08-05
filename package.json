@@ -1,0 +1,23 @@
+{
+  "name": "uranium",
+  "version": "0.0.0",
+  "description": "Game Engine",
+  "main": "uranium.js",
+  "scripts": {
+    "electron": "electron editor/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xobtah/Uranium.git"
+  },
+  "author": "Sylvain Garant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xobtah/Uranium/issues"
+  },
+  "homepage": "https://github.com/Xobtah/Uranium#readme",
+  "dependencies": {
+    "electron": "^1.6.11",
+    "three": "^0.86.0"
+  }
+}
