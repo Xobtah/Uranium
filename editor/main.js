@@ -9,7 +9,7 @@ let mainWindow;
 
 function createWindow() {
 	mainWindow = new BrowserWindow({ webPreferences: { nodeIntegration: false }, width: 1440, height: 900 });
-	//mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
 	mainWindow.setMenu(null);
 	mainWindow.loadURL(url.format({
 		pathname: path.join(__dirname, 'index.html'),
