@@ -48,6 +48,18 @@
 		<script src="../node_modules/three/examples/js/renderers/SoftwareRenderer.js"></script>
 		<script src="../node_modules/three/examples/js/renderers/SVGRenderer.js"></script>
 
+		<!-- Golden Layout -->
+		<!--<script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>-->
+		<script src="../node_modules/golden-layout/lib/jquery.js"></script>
+		<script src="../node_modules/golden-layout/dist/goldenlayout.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="../node_modules/golden-layout/src/css/goldenlayout-base.css">
+		<link type="text/css" rel="stylesheet" href="../node_modules/golden-layout/src/css/goldenlayout-dark-theme.css">
+		<!--<script>if (window.module) module = window.module;</script>-->
+
+		<!-- Bootstrap -->
+		<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
 		<link rel="stylesheet" href="js/libs/codemirror/codemirror.css">
 		<link rel="stylesheet" href="js/libs/codemirror/theme/monokai.css">
 		<script src="js/libs/codemirror/codemirror.js"></script>
@@ -99,7 +111,7 @@
 		<script src="js/Menubar.Edit.js"></script>
 		<script src="js/Menubar.Add.js"></script>
 		<script src="js/Menubar.Play.js"></script>
-		<!-- <script src="js/Menubar.View.js"></script> -->
+		<!--<script src="js/Menubar.View.js"></script>-->
 		<script src="js/Menubar.Examples.js"></script>
 		<script src="js/Menubar.Help.js"></script>
 		<script src="js/Menubar.Status.js"></script>
@@ -154,201 +166,82 @@
 		<script src="js/commands/SetMaterialMapCommand.js"></script>
 		<script src="js/commands/SetSceneCommand.js"></script>
 
-		<!-- <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="qyqgfqd9j8z890t"></script> -->
+		<!--<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="qyqgfqd9j8z890t"></script>-->
 
 		<script src="js/libs/html2canvas.js"></script>
 		<script src="js/libs/three.html.js"></script>
 
-		<script>
-			window.URL = window.URL || window.webkitURL;
-			window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
+		<!--<nav class="navbar navbar-default" style="margin-bottom: 0 !important; background-color: #222; border: initial; border-radius: initial">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display ->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Uranium</a>
+				</div>
 
-			Number.prototype.format = function () {
-				return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-			};
-
-			//
-
-			var editor = new Editor();
-			var viewport = new Viewport(editor);
-			document.body.appendChild(viewport.dom);
-			var script = new Script(editor);
-			document.body.appendChild(script.dom);
-			var player = new Player(editor);
-			document.body.appendChild(player.dom);
-			var toolbar = new Toolbar(editor);
-			document.body.appendChild(toolbar.dom);
-			var menubar = new Menubar(editor);
-			document.body.appendChild(menubar.dom);
-			var sidebar = new Sidebar(editor);
-			document.body.appendChild(sidebar.dom);
-			var modal = new UI.Modal();
-			document.body.appendChild(modal.dom);
-
-			//
-
-			editor.setTheme(editor.config.getKey('theme'));
-			editor.storage.init(function () {
-				editor.storage.get(function (state) {
-					if (isLoadingFromHash)
-						return ;
-					if (state !== undefined)
-						editor.fromJSON(state);
-					var selected = editor.config.getKey('selected');
-					if (selected !== undefined)
-						editor.selectByUuid(selected);
-				});
-
-				//
-
-				var timeout;
-
-				function saveState(scene) {
-					if (editor.config.getKey('autosave') === false)
-						return ;
-					clearTimeout(timeout);
-					timeout = setTimeout(function () {
-						editor.signals.savingStarted.dispatch();
-						timeout = setTimeout(function () {
-							editor.storage.set(editor.toJSON());
-							editor.signals.savingFinished.dispatch();
-						}, 100);
-					}, 1000);
-
-				};
-
-				var signals = editor.signals;
-
-				signals.geometryChanged.add(saveState);
-				signals.objectAdded.add(saveState);
-				signals.objectChanged.add(saveState);
-				signals.objectRemoved.add(saveState);
-				signals.materialChanged.add(saveState);
-				signals.sceneBackgroundChanged.add(saveState);
-				signals.sceneFogChanged.add(saveState);
-				signals.sceneGraphChanged.add(saveState);
-				signals.scriptChanged.add(saveState);
-				signals.historyChanged.add(saveState);
-
-				signals.showModal.add(function (content) {
-					modal.show(content);
-				});
-			});
-
-			//
-
-			document.addEventListener('dragover', function (event) {
-				event.preventDefault();
-				event.dataTransfer.dropEffect = 'copy';
-			}, false);
-
-			document.addEventListener('drop', function (event) {
-				event.preventDefault();
-				if (event.dataTransfer.files.length > 0)
-					editor.loader.loadFile( event.dataTransfer.files[0]);
-			}, false);
-
-			document.addEventListener('keydown', function (event) {
-				switch (event.keyCode) {
-					case 8: // backspace
-						event.preventDefault(); // prevent browser back
-					case 46: // delete
-						var object = editor.selected;
-						if (confirm('Delete ' + object.name + '?') === false)
-							return ;
-						var parent = object.parent;
-						if (parent !== null) editor.execute(new RemoveObjectCommand(object));
-						break;
-					case 90: // Register Ctrl-Z for Undo, Ctrl-Shift-Z for Redo
-						if (event.ctrlKey && event.shiftKey)
-							editor.redo();
-						else if (event.ctrlKey)
-							editor.undo();
-						break;
-					case 87: // Register W for translation transform mode
-						editor.signals.transformModeChanged.dispatch('translate');
-						break;
-					case 69: // Register E for rotation transform mode
-						editor.signals.transformModeChanged.dispatch('rotate');
-						break;
-					case 82: // Register R for scaling transform mode
-						editor.signals.transformModeChanged.dispatch('scale');
-						break;
-				}
-			}, false);
-
-			function onWindowResize(event) {
-				editor.signals.windowResize.dispatch();
-			}
-
-			window.addEventListener('resize', onWindowResize, false);
-
-			onWindowResize();
-
-			//
-
-			var isLoadingFromHash = false;
-			var hash = window.location.hash;
-
-			if (hash.substr(1, 5) === 'file=') {
-				var file = hash.substr(6);
-				if (confirm('Any unsaved data will be lost. Are you sure?')) {
-					var loader = new THREE.FileLoader();
-					loader.crossOrigin = '';
-					loader.load(file, function (text) {
-						editor.clear();
-						editor.fromJSON(JSON.parse(text));
-					});
-					isLoadingFromHash = true;
-				}
-			}
-
-			/*
-			window.addEventListener( 'message', function ( event ) {
-
-				editor.clear();
-				editor.fromJSON( event.data );
-
-			}, false );
-			*/
-
-			// VR
-
-			var groupVR;
-
-			// TODO: Use editor.signals.enteredVR (WebVR 1.0)
-
-			editor.signals.enterVR.add(function () {
-				if (groupVR === undefined) {
-					groupVR = new THREE.HTMLGroup(viewport.dom);
-					editor.sceneHelpers.add( groupVR );
-
-					var mesh = new THREE.HTMLMesh(sidebar.dom);
-					mesh.position.set(15, 0, 15);
-					mesh.rotation.y = - 0.5;
-					groupVR.add(mesh);
-
-					var signals = editor.signals;
-
-					function updateTexture() {
-						mesh.material.map.update();
-					}
-
-					signals.objectSelected.add(updateTexture);
-					signals.objectAdded.add(updateTexture);
-					signals.objectChanged.add(updateTexture);
-					signals.objectRemoved.add(updateTexture);
-					signals.sceneGraphChanged.add(updateTexture);
-					signals.historyChanged.add(updateTexture);
-				}
-
-				groupVR.visible = true;
-			});
-
-			editor.signals.exitedVR.add(function () {
-				if (groupVR !== undefined)
-					groupVR.visible = false;
-			});
-		</script>
+				<!-- Collect the nav links, forms, and other content for toggling ->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">New</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Import</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Export Geometry</a></li>
+								<li><a href="#">Export Object</a></li>
+								<li><a href="#">Export Scene</a></li>
+								<li><a href="#">Export OBJ</a></li>
+								<li><a href="#">Export STL</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Publish</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Edit <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">New</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Import</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Export Geometry</a></li>
+								<li><a href="#">Export Object</a></li>
+								<li><a href="#">Export Scene</a></li>
+								<li><a href="#">Export OBJ</a></li>
+								<li><a href="#">Export STL</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Publish</a></li>
+							</ul>
+						</li>
+					</ul>
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Link</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div><!-- /.navbar-collapse ->
+			</div><!-- /.container-fluid ->
+		</nav>-->
+		<script src="js/index.js"></script>
 	</body>
 </html>

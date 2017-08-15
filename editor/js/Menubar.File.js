@@ -2,224 +2,178 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-Menubar.File = function ( editor ) {
-
+Menubar.File = function (editor) {
 	var NUMBER_PRECISION = 6;
 
-	function parseNumber( key, value ) {
-
-		return typeof value === 'number' ? parseFloat( value.toFixed( NUMBER_PRECISION ) ) : value;
-
-	}
+	function parseNumber(key, value) { return (typeof value === 'number' ? parseFloat( value.toFixed( NUMBER_PRECISION ) ) : value); }
 
 	//
 
 	var container = new UI.Panel();
-	container.setClass( 'menu' );
+	container.setClass('menu');
 
 	var title = new UI.Panel();
-	title.setClass( 'title' );
-	title.setTextContent( 'File' );
-	container.add( title );
+	title.setClass('title');
+	title.setTextContent('File');
+	container.add(title);
 
 	var options = new UI.Panel();
-	options.setClass( 'options' );
-	container.add( options );
+	options.setClass('options');
+	container.add(options);
 
 	// New
 
 	var option = new UI.Row();
-	option.setClass( 'option' );
-	option.setTextContent( 'New' );
-	option.onClick( function () {
-
-		if ( confirm( 'Any unsaved data will be lost. Are you sure?' ) ) {
-
+	option.setClass('option');
+	option.setTextContent('New');
+	option.onClick(() => {
+		if (confirm('Any unsaved data will be lost. Are you sure?'))
 			editor.clear();
-
-		}
-
-	} );
-	options.add( option );
+	});
+	options.add(option);
 
 	//
 
-	options.add( new UI.HorizontalRule() );
+	options.add(new UI.HorizontalRule());
 
 	// Import
 
-	var fileInput = document.createElement( 'input' );
+	var fileInput = document.createElement('input');
 	fileInput.type = 'file';
-	fileInput.addEventListener( 'change', function ( event ) {
-
-		editor.loader.loadFile( fileInput.files[ 0 ] );
-
-	} );
+	fileInput.addEventListener('change', (event) => {
+		editor.loader.loadFile(fileInput.files[0]);
+	});
 
 	var option = new UI.Row();
-	option.setClass( 'option' );
-	option.setTextContent( 'Import' );
-	option.onClick( function () {
-
-		fileInput.click();
-
-	} );
-	options.add( option );
+	option.setClass('option');
+	option.setTextContent('Import');
+	option.onClick(() => fileInput.click());
+	options.add(option);
 
 	//
 
-	options.add( new UI.HorizontalRule() );
+	options.add(new UI.HorizontalRule());
 
 	// Export Geometry
 
 	var option = new UI.Row();
-	option.setClass( 'option' );
-	option.setTextContent( 'Export Geometry' );
-	option.onClick( function () {
-
+	option.setClass('option');
+	option.setTextContent('Export Geometry');
+	option.onClick(() => {
 		var object = editor.selected;
 
-		if ( object === null ) {
-
-			alert( 'No object selected.' );
-			return;
-
+		if (object === null) {
+			alert('No object selected.');
+			return ;
 		}
 
 		var geometry = object.geometry;
 
-		if ( geometry === undefined ) {
-
-			alert( 'The selected object doesn\'t have geometry.' );
-			return;
-
+		if (geometry === undefined) {
+			alert('The selected object doesn\'t have geometry.');
+			return ;
 		}
 
 		var output = geometry.toJSON();
 
 		try {
-
-			output = JSON.stringify( output, parseNumber, '\t' );
-			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
-
-		} catch ( e ) {
-
-			output = JSON.stringify( output );
-
+			output = JSON.stringify(output, parseNumber, '\t');
+			output = output.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, '$1');
+		} catch (e) {
+			output = JSON.stringify(output);
 		}
 
-		saveString( output, 'geometry.json' );
+		saveString(output, 'geometry.json');
 
 	} );
-	options.add( option );
+	options.add(option);
 
 	// Export Object
 
 	var option = new UI.Row();
-	option.setClass( 'option' );
-	option.setTextContent( 'Export Object' );
-	option.onClick( function () {
-
+	option.setClass('option');
+	option.setTextContent('Export Object');
+	option.onClick(() => {
 		var object = editor.selected;
 
-		if ( object === null ) {
-
-			alert( 'No object selected' );
-			return;
-
+		if (object === null) {
+			alert('No object selected');
+			return ;
 		}
 
 		var output = object.toJSON();
 
 		try {
-
-			output = JSON.stringify( output, parseNumber, '\t' );
-			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
-
-		} catch ( e ) {
-
-			output = JSON.stringify( output );
-
+			output = JSON.stringify(output, parseNumber, '\t');
+			output = output.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, '$1');
+		} catch (e) {
+			output = JSON.stringify(output);
 		}
 
-		saveString( output, 'model.json' );
-
-	} );
-	options.add( option );
+		saveString(output, 'model.json');
+	});
+	options.add(option);
 
 	// Export Scene
 
 	var option = new UI.Row();
-	option.setClass( 'option' );
-	option.setTextContent( 'Export Scene' );
-	option.onClick( function () {
-
+	option.setClass('option');
+	option.setTextContent('Export Scene');
+	option.onClick(() => {
 		var output = editor.scene.toJSON();
 
 		try {
-
-			output = JSON.stringify( output, parseNumber, '\t' );
-			output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
-
-		} catch ( e ) {
-
-			output = JSON.stringify( output );
-
+			output = JSON.stringify(output, parseNumber, '\t');
+			output = output.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, '$1');
+		} catch (e) {
+			output = JSON.stringify(output);
 		}
 
-		saveString( output, 'scene.json' );
-
-	} );
-	options.add( option );
+		saveString(output, 'scene.json');
+	});
+	options.add(option);
 
 	// Export OBJ
 
 	var option = new UI.Row();
-	option.setClass( 'option' );
-	option.setTextContent( 'Export OBJ' );
-	option.onClick( function () {
-
+	option.setClass('option');
+	option.setTextContent('Export OBJ');
+	option.onClick(() => {
 		var object = editor.selected;
 
-		if ( object === null ) {
-
-			alert( 'No object selected.' );
-			return;
-
+		if (object === null) {
+			alert('No object selected.');
+			return ;
 		}
 
 		var exporter = new THREE.OBJExporter();
 
-		saveString( exporter.parse( object ), 'model.obj' );
-
-	} );
-	options.add( option );
+		saveString(exporter.parse(object), 'model.obj');
+	});
+	options.add(option);
 
 	// Export STL
 
 	var option = new UI.Row();
-	option.setClass( 'option' );
-	option.setTextContent( 'Export STL' );
-	option.onClick( function () {
-
+	option.setClass('option');
+	option.setTextContent('Export STL');
+	option.onClick(() => {
 		var exporter = new THREE.STLExporter();
 
-		saveString( exporter.parse( editor.scene ), 'model.stl' );
-
-	} );
-	options.add( option );
+		saveString(exporter.parse(editor.scene), 'model.stl');
+	});
+	options.add(option);
 
 	//
 
-	options.add( new UI.HorizontalRule() );
+	options.add(new UI.HorizontalRule());
 
 	// Publish
 
 	var option = new UI.Row();
-	option.setClass( 'option' );
-	option.setTextContent( 'Publish' );
-	option.onClick( function () {
-
+	option.setClass('option');
+	option.setTextContent('Publish');
+	option.onClick(() => {
 		var zip = new JSZip();
 
 		//
@@ -230,72 +184,39 @@ Menubar.File = function ( editor ) {
 
 		var vr = output.project.vr;
 
-		output = JSON.stringify( output, parseNumber, '\t' );
-		output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+		output = JSON.stringify(output, parseNumber, '\t');
+		output = output.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, '$1');
 
-		zip.file( 'app.json', output );
+		zip.file('app.json', output);
 
 		//
 
-		var manager = new THREE.LoadingManager( function () {
+		var manager = new THREE.LoadingManager(() => { save(zip.generate({ type: 'blob' }), 'download.zip'); });
 
-			save( zip.generate( { type: 'blob' } ), 'download.zip' );
-
-		} );
-
-		var loader = new THREE.FileLoader( manager );
-		loader.load( 'js/libs/app/index.html', function ( content ) {
-
+		var loader = new THREE.FileLoader(manager);
+		loader.load('js/libs/app/index.html', (content) => {
 			var includes = [];
 
-			if ( vr ) {
-
-				includes.push( '<script src="js/VRControls.js"></script>' );
-				includes.push( '<script src="js/VREffect.js"></script>' );
-				includes.push( '<script src="js/WebVR.js"></script>' );
-
+			if (vr) {
+				includes.push('<script src="js/VRControls.js"></script>');
+				includes.push('<script src="js/VREffect.js"></script>');
+				includes.push('<script src="js/WebVR.js"></script>');
 			}
 
-			content = content.replace( '<!-- includes -->', includes.join( '\n\t\t' ) );
+			content = content.replace('<!-- includes -->', includes.join('\n\t\t'));
 
-			zip.file( 'index.html', content );
+			zip.file('index.html', content);
+		});
+		loader.load('js/libs/app.js', (content) => { zip.file('js/app.js', content); });
+		loader.load('../build/three.min.js', (content) => zip.file( 'js/three.min.js', content));
 
-		} );
-		loader.load( 'js/libs/app.js', function ( content ) {
-
-			zip.file( 'js/app.js', content );
-
-		} );
-		loader.load( '../build/three.min.js', function ( content ) {
-
-			zip.file( 'js/three.min.js', content );
-
-		} );
-
-		if ( vr ) {
-
-			loader.load( '../examples/js/controls/VRControls.js', function ( content ) {
-
-				zip.file( 'js/VRControls.js', content );
-
-			} );
-
-			loader.load( '../examples/js/effects/VREffect.js', function ( content ) {
-
-				zip.file( 'js/VREffect.js', content );
-
-			} );
-
-			loader.load( '../examples/js/WebVR.js', function ( content ) {
-
-				zip.file( 'js/WebVR.js', content );
-
-			} );
-
+		if (vr) {
+			loader.load('../examples/js/controls/VRControls.js', (content) => zip.file('js/VRControls.js', content));
+			loader.load('../examples/js/effects/VREffect.js', (content) => zip.file('js/VREffect.js', content));
+			loader.load('../examples/js/WebVR.js', (content) => zip.file('js/WebVR.js', content));
 		}
-
-	} );
-	options.add( option );
+	});
+	options.add(option);
 
 	/*
 	// Publish (Dropbox)
@@ -320,26 +241,21 @@ Menubar.File = function ( editor ) {
 
 	//
 
-	var link = document.createElement( 'a' );
+	var link = document.createElement('a');
 	link.style.display = 'none';
-	document.body.appendChild( link ); // Firefox workaround, see #6594
+	document.body.appendChild(link); // Firefox workaround, see #6594
 
-	function save( blob, filename ) {
-
-		link.href = URL.createObjectURL( blob );
+	function save(blob, filename) {
+		link.href = URL.createObjectURL(blob);
 		link.download = filename || 'data.json';
 		link.click();
 
 		// URL.revokeObjectURL( url ); breaks Firefox...
-
 	}
 
-	function saveString( text, filename ) {
-
-		save( new Blob( [ text ], { type: 'text/plain' } ), filename );
-
+	function saveString(text, filename) {
+		save(new Blob([ text ], { type: 'text/plain' }), filename);
 	}
 
-	return container;
-
+	return (container);
 };

@@ -4,8 +4,7 @@
   "description": "Game Engine",
   "main": "uranium.js",
   "scripts": {
-    "electron": "electron editor/main.js",
-    "nw": "nw"
+    "electron": "electron electron/main.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +17,9 @@
   },
   "homepage": "https://github.com/Xobtah/Uranium#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "electron": "^1.6.11",
-    "nw": "^0.24.1",
+    "golden-layout": "^1.5.9",
     "three": "^0.86.0"
   }
 }

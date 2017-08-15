@@ -2,45 +2,46 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var Player = function ( editor ) {
+let Player = function (editor, dom) {
+    //let ipcRenderer = require('electron').ipcRenderer;
+	let signals = editor.signals;
 
-	var signals = editor.signals;
-
-	var container = new UI.Panel();
-	container.setId( 'player' );
-	container.setPosition( 'absolute' );
-	container.setDisplay( 'none' );
+	//let container = new UI.Panel();
+	let container = { dom: dom };
+    container.dom.className = 'Panel';
+	//container.setId('player');
+    container.dom.id = 'player';
+	//container.setPosition('absolute');
+	//container.setDisplay('none');
+	container.dom.style.display = 'none';
 
 	//
 
-	var player = new APP.Player();
-	container.dom.appendChild( player.dom );
+	let player = new APP.Player();
+	container.dom.appendChild(player.dom);
 
-	window.addEventListener( 'resize', function () {
+	window.addEventListener('resize', function () {
+		player.setSize(container.dom.clientWidth, container.dom.clientHeight);
+	});
 
-		player.setSize( container.dom.clientWidth, container.dom.clientHeight );
+    //ipcRenderer.on('playStop', (event, arg) => arg ? signals.startPlayer.dispatch() : signals.stopPlayer.dispatch());
 
-	} );
+	signals.startPlayer.add(function () {
+		//container.setDisplay('');
+		container.dom.style.display = '';
 
-	signals.startPlayer.add( function () {
-
-		container.setDisplay( '' );
-
-		player.load( editor.toJSON() );
-		player.setSize( container.dom.clientWidth, container.dom.clientHeight );
+		player.load(editor.toJSON());
+		player.setSize(container.dom.clientWidth, container.dom.clientHeight);
 		player.play();
+	});
 
-	} );
-
-	signals.stopPlayer.add( function () {
-
-		container.setDisplay( 'none' );
+	signals.stopPlayer.add(function () {
+		//container.setDisplay('none');
+		container.dom.style.display = 'none';
 
 		player.stop();
 		player.dispose();
+	});
 
-	} );
-
-	return container;
-
+	return (container);
 };

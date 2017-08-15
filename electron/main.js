@@ -8,18 +8,24 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-	mainWindow = new BrowserWindow({ webPreferences: { nodeIntegration: false }, width: 1440, height: 900 });
-	mainWindow.webContents.openDevTools();
+	let screenDimensions = electron.screen.getPrimaryDisplay().size;
+
+	mainWindow = new BrowserWindow({
+		webPreferences: { nodeIntegration: false },
+		width: screenDimensions.width * 0.75,
+		height: screenDimensions.height * 0.75
+	});
+	//mainWindow.webContents.openDevTools();
 	mainWindow.setMenu(null);
 	mainWindow.loadURL(url.format({
-		pathname: path.join(__dirname, 'index.html'),
+		pathname: path.join(__dirname, '..', 'editor', 'index.html'),
 		protocol: 'file:',
 		slashes: true
 	}));
-
 	mainWindow.on('closed', function () {
 		mainWindow = null;
 	});
+	require('./menu');
 }
 
 app.on('ready', createWindow);

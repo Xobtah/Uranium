@@ -46,7 +46,7 @@ select {
 
 #viewport {
 	position: absolute;
-	top: 32px;
+	top: 20px;
 	left: 0;
 	right: 300px;
 	bottom: 32px;
@@ -148,7 +148,6 @@ select {
 #sidebar {
 	position: absolute;
 	right: 0;
-	top: 32px;
 	bottom: 0;
 	width: 300px;
 	background: #eee;

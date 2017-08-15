@@ -5,6 +5,13 @@ body {
 	overflow: hidden;
 }
 
+h2 {
+	font: 14px Arial, sans-serif;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
+
 hr {
 	border: 0;
 	border-top: 1px solid #ccc;

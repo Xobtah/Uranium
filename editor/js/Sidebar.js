@@ -2,80 +2,76 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var Sidebar = function ( editor ) {
-
-	var container = new UI.Panel();
-	container.setId( 'sidebar' );
-
-	//
-
-	var sceneTab = new UI.Text( 'SCENE' ).onClick( onClick );
-	var projectTab = new UI.Text( 'PROJECT' ).onClick( onClick );
-	var settingsTab = new UI.Text( 'SETTINGS' ).onClick( onClick );
-
-	var tabs = new UI.Div();
-	tabs.setId( 'tabs' );
-	tabs.add( sceneTab, projectTab, settingsTab );
-	container.add( tabs );
-
-	function onClick( event ) {
-
-		select( event.target.textContent );
-
-	}
+let Sidebar = function (editor, dom) {
+    //let container = new UI.Panel();
+    let container = { dom: dom };
+	//container.setId('sidebar');
+	container.dom.className = 'Panel';
+	container.dom.id = 'sidebar';
 
 	//
 
-	var scene = new UI.Span().add(
-		new Sidebar.Scene( editor ),
-		new Sidebar.Properties( editor ),
-		new Sidebar.Animation( editor ),
-		new Sidebar.Script( editor )
-	);
-	container.add( scene );
+	let sceneTab = new UI.Text('SCENE').onClick(onClick);
+	let projectTab = new UI.Text('PROJECT').onClick(onClick);
+	let settingsTab = new UI.Text('SETTINGS').onClick(onClick);
 
-	var project = new UI.Span().add(
-		new Sidebar.Project( editor )
-	);
-	container.add( project );
+	let tabs = new UI.Div();
+	tabs.setId('tabs');
+	tabs.add(sceneTab, projectTab, settingsTab);
+	//container.add(tabs);
+	container.dom.append(tabs.dom);
 
-	var settings = new UI.Span().add(
-		new Sidebar.Settings( editor ),
-		new Sidebar.History( editor )
-	);
-	container.add( settings );
+	function onClick(event) { select(event.target.textContent); }
 
 	//
 
-	function select( section ) {
+	let scene = new UI.Span().add(
+		new Sidebar.Scene(editor),
+		new Sidebar.Properties(editor),
+		new Sidebar.Animation(editor),
+		new Sidebar.Script(editor)
+	);
+	//container.add(scene);
+	container.dom.append(scene.dom);
 
-		sceneTab.setClass( '' );
-		projectTab.setClass( '' );
-		settingsTab.setClass( '' );
+	let project = new UI.Span().add(new Sidebar.Project(editor));
+	//container.add(project);
+	container.dom.append(project.dom);
 
-		scene.setDisplay( 'none' );
-		project.setDisplay( 'none' );
-		settings.setDisplay( 'none' );
+	let settings = new UI.Span().add(
+		new Sidebar.Settings(editor),
+		new Sidebar.History(editor)
+	);
+	//container.add(settings);
+	container.dom.append(settings.dom);
 
-		switch ( section ) {
+	//
+
+	function select(section) {
+		sceneTab.setClass('');
+		projectTab.setClass('');
+		settingsTab.setClass('');
+
+		scene.setDisplay('none');
+		project.setDisplay('none');
+		settings.setDisplay('none');
+
+		switch (section) {
 			case 'SCENE':
-				sceneTab.setClass( 'selected' );
-				scene.setDisplay( '' );
+				sceneTab.setClass('selected');
+				scene.setDisplay('');
 				break;
 			case 'PROJECT':
-				projectTab.setClass( 'selected' );
-				project.setDisplay( '' );
+				projectTab.setClass('selected');
+				project.setDisplay('');
 				break;
 			case 'SETTINGS':
-				settingsTab.setClass( 'selected' );
-				settings.setDisplay( '' );
+				settingsTab.setClass('selected');
+				settings.setDisplay('');
 				break;
 		}
-
 	}
+	select('SCENE');
 
-	select( 'SCENE' );
-
-	return container;
-
+	return (container);
 };

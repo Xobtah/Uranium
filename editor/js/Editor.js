@@ -3,6 +3,12 @@
  */
 
 var Editor = function () {
+	/*let ipcRenderer = require('electron').ipcRenderer;
+
+	ipcRenderer.on('new', (event, arg) => {
+        if (confirm('Any unsaved data will be lost. Are you sure?'))
+            editor.clear();
+	});*/
 
 	this.DEFAULT_CAMERA = new THREE.PerspectiveCamera(50, 1, 0.1, 10000);
 	this.DEFAULT_CAMERA.name = 'Camera';
