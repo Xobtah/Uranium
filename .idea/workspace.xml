@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf25cfc5-5bfe-477e-8e79-72ee8ce3340d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/css/dark.css" afterPath="$PROJECT_DIR$/editor/css/dark.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/css/light.css" afterPath="$PROJECT_DIR$/editor/css/light.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/index.html" afterPath="$PROJECT_DIR$/editor/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/js/Editor.js" afterPath="$PROJECT_DIR$/editor/js/Editor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/js/Player.js" afterPath="$PROJECT_DIR$/editor/js/Player.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/js/Sidebar.js" afterPath="$PROJECT_DIR$/editor/js/Sidebar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/js/Viewport.Info.js" afterPath="$PROJECT_DIR$/editor/js/Viewport.Info.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/js/Viewport.js" afterPath="$PROJECT_DIR$/editor/js/Viewport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/js/index.js" afterPath="$PROJECT_DIR$/editor/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/js/libs/app.js" afterPath="$PROJECT_DIR$/editor/js/libs/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/electron/main.js" afterPath="$PROJECT_DIR$/electron/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/electron/menu.js" afterPath="$PROJECT_DIR$/electron/menu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -175,7 +163,6 @@
         <option value="$PROJECT_DIR$/editor/js/Sidebar.Settings.js" />
         <option value="$PROJECT_DIR$/editor/js/Menubar.File.js" />
         <option value="$PROJECT_DIR$/editor/js/Menubar.Play.js" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/electron/main.js" />
         <option value="$PROJECT_DIR$/editor/js/Menubar.Add.js" />
         <option value="$PROJECT_DIR$/editor/js/Editor.js" />
@@ -189,6 +176,7 @@
         <option value="$PROJECT_DIR$/editor/js/index.js" />
         <option value="$PROJECT_DIR$/editor/js/Viewport.Info.js" />
         <option value="$PROJECT_DIR$/editor/js/Viewport.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -366,12 +354,12 @@
       <workItem from="1502789682586" duration="6635000" />
       <workItem from="1502802348155" duration="25032000" />
       <workItem from="1502878284333" duration="3809000" />
-      <workItem from="1502894217904" duration="3593000" />
+      <workItem from="1502894217904" duration="3733000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55306000" />
+    <option name="totallyTimeSpent" value="55446000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
@@ -618,13 +606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/editor/js/Menubar.File.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -752,6 +733,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="10" column="38" lean-forward="true" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
           <folding />
         </state>
       </provider>
