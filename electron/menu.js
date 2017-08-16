@@ -61,6 +61,7 @@ let template = [
 
     {
         label: 'Play',
+        accelerator: 'CmdOrCtrl+P',
         click (item, focusedWindow) {
             isPlaying = !isPlaying;
             focusedWindow.webContents.send('playStop', isPlaying);

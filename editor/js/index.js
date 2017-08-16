@@ -10,9 +10,16 @@ let config = {
             //type: 'stack',
             type: 'column',
             content: [ {
-                type: 'component',
-                componentName: 'Scene',
-                componentState: {  }
+                type: 'row',
+                content: [ {
+                    type: 'component',
+                    componentName: 'Scene',
+                    componentState: {  }
+                }, {
+                    type: 'component',
+                    componentName: 'Script',
+                    componentState: {  }
+                } ]
             }, {
                 type: 'component',
                 componentName: 'Game',
@@ -30,7 +37,6 @@ let config = {
 };
 let layout = new GoldenLayout(config);
 let editor = new Editor();
-let script = new Script(editor);
 let toolbar = new Toolbar(editor);
 let menubar = new Menubar(editor);
 let modal = new UI.Modal(editor);
@@ -197,6 +203,9 @@ layout.registerComponent('Game', function (container, componentState) {
 });
 layout.registerComponent('Sidebar', function (container, componentState) {
     new Sidebar(editor, container.getElement()[0]);
+});
+layout.registerComponent('Script', function (container, componentState) {
+    new Script(editor, container.getElement()[0]);
 });
 
 layout.init();
