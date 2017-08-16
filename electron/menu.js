@@ -1,8 +1,8 @@
 const { Menu } = require('electron');
 
-let isPlaying = true;
+let isPlaying = false;
 
-const template = [
+let template = [
 
     {
         label: 'File',
@@ -37,16 +37,34 @@ const template = [
     },
 
     {
-        label: 'Add'
+        label: 'Add',
+        submenu: [
+            {
+                label: 'Group',
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Group') }
+            },
+            { type: 'separator' },
+            {
+                label: 'Plane',
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Plane') }
+            },
+            {
+                label: 'Box',
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Box') }
+            },
+            {
+                label: 'Sphere',
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Sphere') }
+            }
+        ]
     },
 
     {
-        label: 'Play/Stop',
+        label: 'Play',
         click (item, focusedWindow) {
-            if (focusedWindow) {
-                isPlaying = !isPlaying;
-                focusedWindow.webContents.send('playStop', isPlaying);
-            }
+            isPlaying = !isPlaying;
+            focusedWindow.webContents.send('playStop', isPlaying);
+            setMenu();
         }
     },
 
@@ -106,4 +124,14 @@ if (process.platform === 'darwin') {
     ];
 }
 
-Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+function setMenu() {
+    template.forEach((menuItem) => {
+        if (menuItem.label === 'Play' && isPlaying)
+            menuItem.label = 'Stop';
+        else if (menuItem.label === 'Stop' && !isPlaying)
+            menuItem.label = 'Play';
+    });
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+}
+
+setMenu();

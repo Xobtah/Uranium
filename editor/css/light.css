@@ -45,11 +45,6 @@ select {
 /* UI */
 
 #viewport {
-	position: absolute;
-	top: 20px;
-	left: 0;
-	right: 300px;
-	bottom: 32px;
 }
 
 	#viewport #info {
@@ -67,11 +62,6 @@ select {
 }
 
 #player {
-	position: absolute;
-	top: 32px;
-	left: 0;
-	right: 300px;
-	bottom: 32px;
 }
 
 #menubar {
@@ -147,7 +137,6 @@ select {
 
 #sidebar {
 	position: absolute;
-	right: 0;
 	bottom: 0;
 	width: 300px;
 	background: #eee;

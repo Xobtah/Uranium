@@ -2,20 +2,55 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var Editor = function () {
-	/*let ipcRenderer = require('electron').ipcRenderer;
+let Editor = function () {
+	let ipcRenderer = require('electron').ipcRenderer;
+	let meshCount = 0;
 
 	ipcRenderer.on('new', (event, arg) => {
         if (confirm('Any unsaved data will be lost. Are you sure?'))
-            editor.clear();
-	});*/
+            this.clear();
+	});
+
+	ipcRenderer.on('add', (event, arg) => {
+        let geometry = null, material = null, mesh = null;
+
+		switch (arg) {
+			case 'Group':
+                mesh = new THREE.Group();
+                mesh.name = 'Group ' + (++meshCount);
+                break;
+			case 'Plane':
+                geometry = new THREE.PlaneBufferGeometry(2, 2);
+                material = new THREE.MeshStandardMaterial();
+                mesh = new THREE.Mesh(geometry, material);
+                mesh.name = 'Plane ' + (++meshCount);
+				break;
+            case 'Box':
+                geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+                mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
+                mesh.name = 'Box ' + (++meshCount);
+                break;
+            case 'Sphere':
+                let radius = 1;
+                let widthSegments = 32, heightSegments = 16;
+                let phiStart = 0, phiLength = Math.PI * 2;
+                let thetaStart = 0, thetaLength = Math.PI;
+
+                geometry = new THREE.SphereBufferGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
+                mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
+                mesh.name = 'Sphere ' + (++meshCount);
+                break;
+		}
+		if (mesh)
+        	editor.execute(new AddObjectCommand(mesh));
+	});
 
 	this.DEFAULT_CAMERA = new THREE.PerspectiveCamera(50, 1, 0.1, 10000);
 	this.DEFAULT_CAMERA.name = 'Camera';
 	this.DEFAULT_CAMERA.position.set(20, 10, 20);
 	this.DEFAULT_CAMERA.lookAt(new THREE.Vector3());
 
-	var Signal = signals.Signal;
+	let Signal = signals.Signal;
 
 	this.signals = {
 		// script
@@ -130,7 +165,7 @@ Editor.prototype = {
 	//
 
 	addObject: function (object) {
-		var scope = this;
+		let scope = this;
 		object.traverse(function (child) {
 			if (child.geometry !== undefined)
 				scope.addGeometry( child.geometry );
@@ -150,7 +185,7 @@ Editor.prototype = {
 		parent.add(object);
 		// sort children array
 		if (before !== undefined) {
-			var index = parent.children.indexOf(before);
+			let index = parent.children.indexOf(before);
 			parent.children.splice(index, 0, object);
 			parent.children.pop();
 		}
@@ -165,7 +200,7 @@ Editor.prototype = {
 	removeObject: function (object) {
 		if (object.parent === null)
 			return ; // avoid deleting the camera or scene
-		var scope = this;
+		let scope = this;
 		object.traverse(function (child) {
 			scope.removeHelper(child);
 		});
@@ -199,10 +234,10 @@ Editor.prototype = {
 	//
 
 	addHelper: function () {
-		var geometry = new THREE.SphereBufferGeometry( 2, 4, 2 );
-		var material = new THREE.MeshBasicMaterial( { color: 0xff0000, visible: false } );
+		let geometry = new THREE.SphereBufferGeometry( 2, 4, 2 );
+		let material = new THREE.MeshBasicMaterial( { color: 0xff0000, visible: false } );
 		return function (object) {
-			var helper;
+			let helper;
 			if (object instanceof THREE.Camera)
 				helper = new THREE.CameraHelper(object, 1);
 			else if (object instanceof THREE.PointLight)
@@ -218,7 +253,7 @@ Editor.prototype = {
 			else
 				// no helper for this object type
 				return;
-			var picker = new THREE.Mesh(geometry, material);
+			let picker = new THREE.Mesh(geometry, material);
 			picker.name = 'picker';
 			picker.userData.object = object;
 			helper.add(picker);
@@ -230,7 +265,7 @@ Editor.prototype = {
 
 	removeHelper: function (object) {
 		if (this.helpers[object.id] !== undefined) {
-			var helper = this.helpers[object.id];
+			let helper = this.helpers[object.id];
 			helper.parent.remove(helper);
 			delete this.helpers[object.id];
 			this.signals.helperRemoved.dispatch(helper);
@@ -249,14 +284,14 @@ Editor.prototype = {
 	removeScript: function (object, script) {
 		if (this.scripts[object.uuid] === undefined)
 			return ;
-		var index = this.scripts[object.uuid].indexOf(script);
+		let index = this.scripts[object.uuid].indexOf(script);
 		if (index !== - 1)
 			this.scripts[object.uuid].splice(index, 1);
 		this.signals.scriptRemoved.dispatch(script);
 	},
 
 	getObjectMaterial: function (object, slot) {
-		var material = object.material;
+		let material = object.material;
 		if (Array.isArray(material))
 			material = material[slot];
 		return material;
@@ -274,7 +309,7 @@ Editor.prototype = {
 	select: function (object) {
 		if (this.selected === object)
 			return ;
-		var uuid = null;
+		let uuid = null;
 		if (object !== null)
 			uuid = object.uuid;
 		this.selected = object;
@@ -291,7 +326,7 @@ Editor.prototype = {
 	},
 
 	selectByUuid: function (uuid) {
-		var scope = this;
+		let scope = this;
 		this.scene.traverse(function (child) {
 			if (child.uuid === uuid)
 				scope.select(child);
@@ -316,7 +351,7 @@ Editor.prototype = {
 		this.camera.copy(this.DEFAULT_CAMERA);
 		this.scene.background.setHex(0xaaaaaa);
 		this.scene.fog = null;
-		var objects = this.scene.children;
+		let objects = this.scene.children;
 		while (objects.length > 0)
 			this.removeObject(objects[0]);
 		this.geometries = {};
@@ -330,13 +365,13 @@ Editor.prototype = {
 	//
 
 	fromJSON: function (json) {
-		var loader = new THREE.ObjectLoader();
+		let loader = new THREE.ObjectLoader();
 		// backwards
 		if (json.scene === undefined) {
 			this.setScene(loader.parse(json));
 			return ;
 		}
-		var camera = loader.parse(json.camera);
+		let camera = loader.parse(json.camera);
 		this.camera.copy(camera);
 		this.camera.aspect = this.DEFAULT_CAMERA.aspect;
 		this.camera.updateProjectionMatrix();
@@ -347,10 +382,10 @@ Editor.prototype = {
 
 	toJSON: function () {
 		// scripts clean up
-		var scene = this.scene;
-		var scripts = this.scripts;
-		for (var key in scripts) {
-			var script = scripts[ key ];
+		let scene = this.scene;
+		let scripts = this.scripts;
+		for (let key in scripts) {
+			let script = scripts[ key ];
 			if (script.length === 0 || scene.getObjectByProperty('uuid', key) === undefined)
 				delete scripts[ key ];
 		}

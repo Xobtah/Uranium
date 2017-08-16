@@ -6,21 +6,25 @@ Number.prototype.format = function () { return (this.toString().replace(/(\d)(?=
 let config = {
     content: [ {
         type: 'row',
-        content:[ {
-            type: 'component',
-            componentName: 'Scene',
-            componentState: {  }
+        content: [ {
+            //type: 'stack',
+            type: 'column',
+            content: [ {
+                type: 'component',
+                componentName: 'Scene',
+                componentState: {  }
+            }, {
+                type: 'component',
+                componentName: 'Game',
+                componentState: {  }
+            } ]
         }, {
             type: 'column',
-            content:[ {
+            content: [ {
                 type: 'component',
                 componentName: 'Sidebar',
                 componentState: {  }
-            }/*,{
-                type: 'component',
-                componentName: 'testComponent',
-                componentState: {  }
-            }*/ ]
+            } ]
         } ]
     } ]
 };
@@ -185,14 +189,14 @@ editor.signals.exitedVR.add(() => {
 
 layout.registerComponent('Scene', function (container, componentState) {
     container.on('resize', () => editor.signals.windowResize.dispatch());
-    let viewport = new Viewport(editor, container.getElement()[0]);
-    //let player = new Player(editor, container.getElement()[0]);
-    container.getElement().append(viewport.dom);
-    //container.getElement().append(player.dom);
+    new Viewport(editor, container.getElement()[0]);
+});
+layout.registerComponent('Game', function (container, componentState) {
+    container.on('resize', () => editor.signals.windowResize.dispatch());
+    new Player(editor, container.getElement()[0]);
 });
 layout.registerComponent('Sidebar', function (container, componentState) {
-    let sidebar = new Sidebar(editor, container.getElement()[0]);
-    container.getElement().append(sidebar.dom);
+    new Sidebar(editor, container.getElement()[0]);
 });
 
 layout.init();

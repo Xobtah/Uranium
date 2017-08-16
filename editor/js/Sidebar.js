@@ -3,9 +3,7 @@
  */
 
 let Sidebar = function (editor, dom) {
-    //let container = new UI.Panel();
     let container = { dom: dom };
-	//container.setId('sidebar');
 	container.dom.className = 'Panel';
 	container.dom.id = 'sidebar';
 
@@ -18,7 +16,6 @@ let Sidebar = function (editor, dom) {
 	let tabs = new UI.Div();
 	tabs.setId('tabs');
 	tabs.add(sceneTab, projectTab, settingsTab);
-	//container.add(tabs);
 	container.dom.append(tabs.dom);
 
 	function onClick(event) { select(event.target.textContent); }

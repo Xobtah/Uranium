@@ -11,7 +11,7 @@ function createWindow() {
 	let screenDimensions = electron.screen.getPrimaryDisplay().size;
 
 	mainWindow = new BrowserWindow({
-		webPreferences: { nodeIntegration: false },
+		//webPreferences: { nodeIntegration: false },
 		width: screenDimensions.width * 0.75,
 		height: screenDimensions.height * 0.75
 	});

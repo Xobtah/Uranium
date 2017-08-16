@@ -5,15 +5,13 @@
 let Viewport = function (editor, dom) {
 	let signals = editor.signals;
 
-	//let container = new UI.Panel();
 	let container = { dom: dom };
     container.dom.className = 'Panel';
-	//container.setId('viewport');
     container.dom.id = 'viewport';
-	//container.setPosition('absolute');
+    container.dom.style.position = 'relative';
 
-	//container.add(new Viewport.Info(editor));
-	container.dom.append((new Viewport.Info(editor)).dom);
+    let viewportInfoDom = document.createElement('div');
+	container.dom.append((new Viewport.Info(editor, viewportInfoDom)).dom);
 
 	//
 

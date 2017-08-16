@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/Xobtah/Uranium#readme",
   "dependencies": {
-    "bootstrap": "^3.3.7",
     "electron": "^1.6.11",
     "golden-layout": "^1.5.9",
     "three": "^0.86.0"
