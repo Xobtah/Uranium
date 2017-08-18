@@ -4,7 +4,6 @@
 
 Sidebar.Settings = function (editor) {
 	let config = editor.config;
-	let signals = editor.signals;
 
 	let container = new UI.Panel();
 	container.setBorderTop('0');

@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-Sidebar.Script = function (editor, dom) {
+Sidebar.Script = function (editor, eventHub) {
 	let signals = editor.signals;
 
 	let container = new UI.Panel();
@@ -11,12 +11,6 @@ Sidebar.Script = function (editor, dom) {
 	container.add(new UI.Text('Script').setTextTransform('uppercase'));
 	container.add(new UI.Break());
 	container.add(new UI.Break());
-	/*let container = { dom: dom };
-	container.dom.style.display = 'none';
-
-	container.dom.append(new UI.Text('Script').setTextTransform('uppercase').dom);
-	container.dom.append(new UI.Break().dom);
-	container.dom.append(new UI.Break().dom);*/
 
 	//
 
@@ -63,7 +57,7 @@ Sidebar.Script = function (editor, dom) {
 					let edit = new UI.Button('Edit');
 					edit.setMarginLeft('4px');
 					edit.onClick(function () {
-						signals.editScript.dispatch(object, script);
+						eventHub.emit('editScript', object, script);
 					});
 					scriptsContainer.add(edit);
 
@@ -71,7 +65,7 @@ Sidebar.Script = function (editor, dom) {
 					remove.setMarginLeft('4px');
 					remove.onClick(function () {
 						if (confirm('Are you sure?'))
-							editor.execute( new RemoveScriptCommand(editor.selected, script));
+							editor.execute(new RemoveScriptCommand(editor.selected, script));
 					});
 					scriptsContainer.add(remove);
 

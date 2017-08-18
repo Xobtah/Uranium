@@ -89,7 +89,23 @@ let template = [
         ]
     },
 
-    { role: 'window', submenu: [ { role: 'minimize' }, { role: 'close' } ] },
+    {
+        role: 'window',
+        submenu: [
+            {
+                label: 'Open Component',
+                submenu: [
+                    { label: 'Scene', click(item, focusedWindow) { focusedWindow.webContents.send('openComponent', 'Scene'); } },
+                    { label: 'Game', click(item, focusedWindow) { focusedWindow.webContents.send('openComponent', 'Game'); } },
+                    { label: 'Sidebar', click(item, focusedWindow) { focusedWindow.webContents.send('openComponent', 'Sidebar'); } },
+                    { label: 'Script', click(item, focusedWindow) { focusedWindow.webContents.send('openComponent', 'Script'); } }
+                ]
+            },
+            { type: 'separator' },
+            { role: 'minimize' },
+            { role: 'close' }
+        ]
+    },
 
     { role: 'help', submenu: [ { label: 'Learn More', /*click () { require('electron').shell.openExternal('http://electron.atom.io') }*/ } ] }
 ];

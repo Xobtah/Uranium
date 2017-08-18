@@ -2,10 +2,11 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-let Script = function (editor, dom) {
+let Script = function (editor, container) {
+	let eventHub = container.layoutManager.eventHub;
 	let signals = editor.signals;
 
-	let container = { dom: dom };
+	container.dom = container.getElement()[0];
 	container.dom.id = 'script';
     container.dom.style.backgroundColor = '#272822';
     container.dom.style.display = 'none';
@@ -17,34 +18,11 @@ let Script = function (editor, dom) {
 	let title = new UI.Text().setColor('#fff');
 	header.add(title);
 
-	let buttonSVG = (function () {
-		let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-		svg.setAttribute('width', 32);
-		svg.setAttribute('height', 32);
-		let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-		path.setAttribute('d', 'M 12,12 L 22,22 M 22,12 12,22');
-		path.setAttribute('stroke', '#fff');
-		svg.appendChild(path);
-		return (svg);
-	})();
-
-	let close = new UI.Element(buttonSVG);
-	close.setPosition('absolute');
-	close.setTop('3px');
-	close.setRight('1px');
-	close.setCursor('pointer');
-	close.onClick(function () {
-		container.dom.style.display = 'none';
-	});
-	header.add(close);
-
-
 	let renderer;
 
-	signals.rendererChanged.add(function (newRenderer) {
-		renderer = newRenderer;
+	eventHub.on('rendererChanged', (newRenderer) => {
+        renderer = newRenderer;
 	});
-
 
 	let delay;
 	let currentMode;
@@ -62,7 +40,7 @@ let Script = function (editor, dom) {
 	});
 	codemirror.setOption('theme', 'monokai');
 	codemirror.on('change', function () {
-		if ( codemirror.state.focused === false )
+		if (codemirror.state.focused === false)
 			return ;
 
 		clearTimeout(delay);
@@ -274,51 +252,53 @@ let Script = function (editor, dom) {
 		container.dom.style.display = 'none';
 	});
 
-	signals.editScript.add(function (object, script) {
-		let mode, name, source;
+	this.editScript = function (object, script) {
+        let mode, name, source;
 
-		if (typeof(script) === 'object') {
-			mode = 'javascript';
-			name = script.name;
-			source = script.source;
-			title.setValue(object.name + ' / ' + name);
-		}
-		else {
-			switch (script) {
-				case 'vertexShader':
-					mode = 'glsl';
-					name = 'Vertex Shader';
-					source = object.material.vertexShader || "";
-					break;
-				case 'fragmentShader':
-					mode = 'glsl';
-					name = 'Fragment Shader';
-					source = object.material.fragmentShader || "";
-					break;
-				case 'programInfo':
-					mode = 'json';
-					name = 'Program Properties';
-					let json = {
-						defines: object.material.defines,
-						uniforms: object.material.uniforms,
-						attributes: object.material.attributes
-					};
-					source = JSON.stringify(json, null, '\t');
-			}
-			title.setValue(object.material.name + ' / ' + name);
-		}
+        if (typeof(script) === 'object') {
+            mode = 'javascript';
+            name = script.name;
+            source = script.source;
+            title.setValue(object.name + ' / ' + name);
+        }
+        else {
+            switch (script) {
+                case 'vertexShader':
+                    mode = 'glsl';
+                    name = 'Vertex Shader';
+                    source = object.material.vertexShader || "";
+                    break;
+                case 'fragmentShader':
+                    mode = 'glsl';
+                    name = 'Fragment Shader';
+                    source = object.material.fragmentShader || "";
+                    break;
+                case 'programInfo':
+                    mode = 'json';
+                    name = 'Program Properties';
+                    let json = {
+                        defines: object.material.defines,
+                        uniforms: object.material.uniforms,
+                        attributes: object.material.attributes
+                    };
+                    source = JSON.stringify(json, null, '\t');
+            }
+            title.setValue(object.material.name + ' / ' + name);
+        }
 
-		currentMode = mode;
-		currentScript = script;
-		currentObject = object;
+        currentMode = mode;
+        currentScript = script;
+        currentObject = object;
 
-		container.dom.style.display = '';
-		codemirror.setValue(source);
-		codemirror.clearHistory();
-		if (mode === 'json')
-			mode = { name: 'javascript', json: true };
-		codemirror.setOption('mode', mode);
-	});
+        container.dom.style.display = '';
+        codemirror.setValue(source);
+        codemirror.clearHistory();
+        if (mode === 'json')
+            mode = { name: 'javascript', json: true };
+        codemirror.setOption('mode', mode);
+    };
+
+	eventHub.on('editScript', this.editScript);
 
 	signals.scriptRemoved.add(function (script) {
 		if (currentScript === script)

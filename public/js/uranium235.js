@@ -3,6 +3,7 @@ window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.Mo
 
 Number.prototype.format = function () { return (this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")); };
 
+let { ipcRenderer } = require('electron');
 let config = {
     content: [ {
         type: 'row',
@@ -127,14 +128,6 @@ document.addEventListener('keydown', (event) => {
     }
 }, false);
 
-function onWindowResize(event) {
-    editor.signals.windowResize.dispatch();
-}
-
-window.addEventListener('resize', onWindowResize, false);
-
-onWindowResize();
-
 //
 
 let isLoadingFromHash = false;
@@ -194,18 +187,32 @@ editor.signals.exitedVR.add(() => {
 });
 
 layout.registerComponent('Scene', function (container, componentState) {
-    container.on('resize', () => editor.signals.windowResize.dispatch());
-    new Viewport(editor, container.getElement()[0]);
+    new Viewport(editor, container);
 });
 layout.registerComponent('Game', function (container, componentState) {
-    container.on('resize', () => editor.signals.windowResize.dispatch());
-    new Player(editor, container.getElement()[0]);
+    container.layoutManager.eventHub.on('startPlayer', () => editor.signals.startPlayer.dispatch());
+    container.layoutManager.eventHub.on('stopPlayer', () => editor.signals.stopPlayer.dispatch());
+    new Player(editor, container);
 });
 layout.registerComponent('Sidebar', function (container, componentState) {
-    new Sidebar(editor, container.getElement()[0]);
+    container.layoutManager.eventHub.on('rendererChanged', (renderer) => editor.signals.rendererChanged.dispatch(renderer));
+    /*container.layoutManager.eventHub.on('editScript', (object, script) => {
+        layout.root.contentItems[0].addChild({
+            type: 'component',
+            componentName: 'Script',
+            componentState: { object: object, script: script }
+        });
+    });*/
+    new Sidebar(editor, container);
 });
 layout.registerComponent('Script', function (container, componentState) {
-    new Script(editor, container.getElement()[0]);
+    new Script(editor, container);
+});
+
+ipcRenderer.on('openComponent', (event, arg) => {
+    if ([ 'Scene', 'Game', 'Sidebar', 'Script' ].indexOf(arg) < 0)
+        return ;
+    layout.root.contentItems[0].addChild({ type: 'component', componentName: arg, componentState: {  } });
 });
 
 layout.init();

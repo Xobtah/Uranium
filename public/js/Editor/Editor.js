@@ -42,7 +42,7 @@ let Editor = function () {
                 break;
 		}
 		if (mesh)
-        	editor.execute(new AddObjectCommand(mesh));
+        	this.execute(new AddObjectCommand(mesh));
 	});
 
 	this.DEFAULT_CAMERA = new THREE.PerspectiveCamera(50, 1, 0.1, 10000);
@@ -54,11 +54,11 @@ let Editor = function () {
 
 	this.signals = {
 		// script
-		editScript: new Signal(),
+		//editScript: new Signal(),
 
 		// player
-		startPlayer: new Signal(),
-		stopPlayer: new Signal(),
+		startPlayer: new Signal(),//
+		stopPlayer: new Signal(),//
 
 		// vr
 		enterVR: new Signal(),
@@ -80,7 +80,7 @@ let Editor = function () {
 		transformModeChanged: new Signal(),
 		snapChanged: new Signal(),
 		spaceChanged: new Signal(),
-		rendererChanged: new Signal(),
+		rendererChanged: new Signal(),//
 
 		sceneBackgroundChanged: new Signal(),
 		sceneFogChanged: new Signal(),
@@ -106,7 +106,7 @@ let Editor = function () {
 		scriptChanged: new Signal(),
 		scriptRemoved: new Signal(),
 
-		windowResize: new Signal(),
+		windowResize: new Signal(),//
 
 		showGridChanged: new Signal(),
 		refreshSidebarObject3D: new Signal(),
@@ -134,7 +134,6 @@ let Editor = function () {
 
 	this.selected = null;
 	this.helpers = {};
-
 };
 
 Editor.prototype = {
@@ -276,7 +275,7 @@ Editor.prototype = {
 
 	addScript: function (object, script) {
 		if (this.scripts[object.uuid] === undefined)
-			this.scripts[ object.uuid ] = [];
+			this.scripts[object.uuid] = [];
 		this.scripts[object.uuid].push(script);
 		this.signals.scriptAdded.dispatch(script);
 	},
@@ -385,9 +384,9 @@ Editor.prototype = {
 		let scene = this.scene;
 		let scripts = this.scripts;
 		for (let key in scripts) {
-			let script = scripts[ key ];
+			let script = scripts[key];
 			if (script.length === 0 || scene.getObjectByProperty('uuid', key) === undefined)
-				delete scripts[ key ];
+				delete scripts[key];
 		}
 		//
 		return ({

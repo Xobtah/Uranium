@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-Sidebar.Material = function ( editor ) {
+Sidebar.Material = function ( editor, eventHub ) {
 
 	var signals = editor.signals;
 
@@ -133,7 +133,7 @@ Sidebar.Material = function ( editor ) {
 	materialProgramInfo.setMarginLeft( '4px' );
 	materialProgramInfo.onClick( function () {
 
-		signals.editScript.dispatch( currentObject, 'programInfo' );
+		eventHub.emit('editScript', currentObject, 'programInfo');
 
 	} );
 	materialProgramRow.add( materialProgramInfo );
@@ -142,7 +142,7 @@ Sidebar.Material = function ( editor ) {
 	materialProgramVertex.setMarginLeft( '4px' );
 	materialProgramVertex.onClick( function () {
 
-		signals.editScript.dispatch( currentObject, 'vertexShader' );
+		eventHub.emit('editScript', currentObject, 'vertexShader');
 
 	} );
 	materialProgramRow.add( materialProgramVertex );
@@ -151,7 +151,7 @@ Sidebar.Material = function ( editor ) {
 	materialProgramFragment.setMarginLeft( '4px' );
 	materialProgramFragment.onClick( function () {
 
-		signals.editScript.dispatch( currentObject, 'fragmentShader' );
+		eventHub.emit('editScript', currentObject, 'fragmentShader');
 
 	} );
 	materialProgramRow.add( materialProgramFragment );

@@ -18,7 +18,7 @@ function createWindow() {
 	//mainWindow.webContents.openDevTools();
 	mainWindow.setMenu(null);
 	mainWindow.loadURL(url.format({
-		pathname: path.join(__dirname, '..', 'editor', 'index.html'),
+		pathname: path.join(__dirname, '..', 'public', 'index.html'),
 		protocol: 'file:',
 		slashes: true
 	}));

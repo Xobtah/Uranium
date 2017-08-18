@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-Sidebar.Properties = function ( editor ) {
+Sidebar.Properties = function ( editor, eventHub ) {
 
 	var signals = editor.signals;
 
@@ -36,7 +36,7 @@ Sidebar.Properties = function ( editor ) {
 	container.add( geometry );
 
 	var material = new UI.Span().add(
-		new Sidebar.Material( editor )
+		new Sidebar.Material( editor, eventHub )
 	);
 	container.add( material );
 

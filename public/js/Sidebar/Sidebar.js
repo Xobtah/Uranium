@@ -2,8 +2,10 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-let Sidebar = function (editor, dom) {
-    let container = { dom: dom };
+let Sidebar = function (editor, container) {
+	let eventHub = container.layoutManager.eventHub;
+
+    container.dom = container.getElement()[0];
 	container.dom.className = 'Panel';
 	container.dom.id = 'sidebar';
 
@@ -24,14 +26,14 @@ let Sidebar = function (editor, dom) {
 
 	let scene = new UI.Span().add(
 		new Sidebar.Scene(editor),
-		new Sidebar.Properties(editor),
+		new Sidebar.Properties(editor, eventHub),
 		new Sidebar.Animation(editor),
-		new Sidebar.Script(editor)
+		new Sidebar.Script(editor, eventHub)
 	);
 	//container.add(scene);
 	container.dom.append(scene.dom);
 
-	let project = new UI.Span().add(new Sidebar.Project(editor));
+	let project = new UI.Span().add(new Sidebar.Project(editor, eventHub));
 	//container.add(project);
 	container.dom.append(project.dom);
 

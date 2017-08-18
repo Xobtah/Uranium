@@ -2,10 +2,11 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-let Viewport = function (editor, dom) {
+let Viewport = function (editor, container) {
+	let eventHub = container.layoutManager.eventHub;
 	let signals = editor.signals;
 
-	let container = { dom: dom };
+	container.dom = container.getElement()[0];
     container.dom.className = 'Panel';
     container.dom.id = 'viewport';
     container.dom.style.position = 'relative';
@@ -229,25 +230,25 @@ let Viewport = function (editor, dom) {
 		transformControls.setSpace(space);
 	});
 
-	signals.rendererChanged.add(function (newRenderer) {
-		if (renderer !== null)
-			container.dom.removeChild(renderer.domElement);
-		renderer = newRenderer;
-		renderer.autoClear = false;
-		renderer.autoUpdateScene = false;
-		renderer.setPixelRatio(window.devicePixelRatio);
-		renderer.setSize(container.dom.offsetWidth, container.dom.offsetHeight);
+	eventHub.on('rendererChanged', (newRenderer) => {
+        if (renderer !== null)
+            container.dom.removeChild(renderer.domElement);
+        renderer = newRenderer;
+        renderer.autoClear = false;
+        renderer.autoUpdateScene = false;
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(container.dom.offsetWidth, container.dom.offsetHeight);
 
-		container.dom.appendChild(renderer.domElement);
+        container.dom.appendChild(renderer.domElement);
 
-		if (WEBVR.isAvailable() === true) {
-			vrControls = new THREE.VRControls(vrCamera);
-			vrEffect = new THREE.VREffect(renderer);
-			window.addEventListener('vrdisplaypresentchange', function (event) {
-				effect.isPresenting ? signals.enteredVR.dispatch() : signals.exitedVR.dispatch();
-			}, false);
-		}
-		render();
+        if (WEBVR.isAvailable() === true) {
+            vrControls = new THREE.VRControls(vrCamera);
+            vrEffect = new THREE.VREffect(renderer);
+            window.addEventListener('vrdisplaypresentchange', function (event) {
+                effect.isPresenting ? signals.enteredVR.dispatch() : signals.exitedVR.dispatch();
+            }, false);
+        }
+        render();
 	});
 
 	signals.sceneGraphChanged.add(function () {
@@ -356,17 +357,16 @@ let Viewport = function (editor, dom) {
 
 	//
 
-	signals.windowResize.add(function () {
-		// TODO: Move this out?
-		editor.DEFAULT_CAMERA.aspect = container.dom.offsetWidth / container.dom.offsetHeight;
-		editor.DEFAULT_CAMERA.updateProjectionMatrix();
+	container.on('resize', () => {
+        editor.DEFAULT_CAMERA.aspect = container.dom.offsetWidth / container.dom.offsetHeight;
+        editor.DEFAULT_CAMERA.updateProjectionMatrix();
 
-		camera.aspect = container.dom.offsetWidth / container.dom.offsetHeight;
-		camera.updateProjectionMatrix();
+        camera.aspect = container.dom.offsetWidth / container.dom.offsetHeight;
+        camera.updateProjectionMatrix();
 
-		renderer.setSize(container.dom.offsetWidth, container.dom.offsetHeight);
+        renderer.setSize(container.dom.offsetWidth, container.dom.offsetHeight);
 
-		render();
+        render();
 	});
 
 	signals.showGridChanged.add(function (showGrid) {

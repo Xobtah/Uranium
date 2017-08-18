@@ -2,9 +2,8 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-Sidebar.Project = function (editor) {
+Sidebar.Project = function (editor, eventHub) {
 	let config = editor.config;
-	let signals = editor.signals;
 
 	let rendererTypes = {
 		'WebGLRenderer': THREE.WebGLRenderer,
@@ -115,7 +114,7 @@ Sidebar.Project = function (editor) {
 			// renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 		}
 
-		signals.rendererChanged.dispatch(renderer);
+		eventHub.emit('rendererChanged', renderer);
 	}
 
 	createRenderer(config.getKey('project/renderer'), config.getKey('project/renderer/antialias'), config.getKey('project/renderer/shadows'), config.getKey('project/renderer/gammaInput'), config.getKey('project/renderer/gammaOutput'));
