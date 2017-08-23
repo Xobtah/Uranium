@@ -282,6 +282,7 @@ let Script = function (editor, container) {
                         attributes: object.material.attributes
                     };
                     source = JSON.stringify(json, null, '\t');
+                    break;
             }
             title.setValue(object.material.name + ' / ' + name);
         }

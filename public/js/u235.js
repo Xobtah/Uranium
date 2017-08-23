@@ -7,40 +7,31 @@ let { ipcRenderer } = require('electron');
 let config = {
     content: [ {
         type: 'row',
-        content: [ {
-            //type: 'stack',
+        content: [  {
             type: 'column',
             content: [ {
-                type: 'row',
+                type: 'column',
                 content: [ {
                     type: 'component',
                     componentName: 'Scene',
                     componentState: {  }
                 }, {
                     type: 'component',
-                    componentName: 'Script',
+                    componentName: 'Game',
                     componentState: {  }
                 } ]
-            }, {
-                type: 'component',
-                componentName: 'Game',
-                componentState: {  }
             } ]
         }, {
-            type: 'column',
-            content: [ {
-                type: 'component',
-                componentName: 'Sidebar',
-                componentState: {  }
-            } ]
+            type: 'component',
+            componentName: 'Sidebar',
+            componentState: {  },
+            width: 25
         } ]
     } ]
 };
 let layout = new GoldenLayout(config);
 let editor = new Editor();
-let toolbar = new Toolbar(editor);
-let menubar = new Menubar(editor);
-let modal = new UI.Modal(editor);
+//let modal = new UI.Modal(editor);
 
 editor.setTheme(editor.config.getKey('theme'));
 editor.storage.init(() => {
@@ -83,7 +74,7 @@ editor.storage.init(() => {
     signals.sceneGraphChanged.add(saveState);
     signals.scriptChanged.add(saveState);
     signals.historyChanged.add(saveState);
-    signals.showModal.add((content) => modal.show(content));
+    //signals.showModal.add((content) => modal.show(content));
 });
 
 //
@@ -190,19 +181,16 @@ layout.registerComponent('Scene', function (container, componentState) {
     new Viewport(editor, container);
 });
 layout.registerComponent('Game', function (container, componentState) {
-    container.layoutManager.eventHub.on('startPlayer', () => editor.signals.startPlayer.dispatch());
-    container.layoutManager.eventHub.on('stopPlayer', () => editor.signals.stopPlayer.dispatch());
     new Player(editor, container);
 });
 layout.registerComponent('Sidebar', function (container, componentState) {
-    container.layoutManager.eventHub.on('rendererChanged', (renderer) => editor.signals.rendererChanged.dispatch(renderer));
-    /*container.layoutManager.eventHub.on('editScript', (object, script) => {
+    container.layoutManager.eventHub.on('openScript', (object, script) => {
         layout.root.contentItems[0].addChild({
-            type: 'component',
-            componentName: 'Script',
+            type: 'component', componentName: 'Script',
             componentState: { object: object, script: script }
-        });
-    });*/
+        }, 0);
+        container.layoutManager.eventHub.emit('editScript', object, script);
+    });
     new Sidebar(editor, container);
 });
 layout.registerComponent('Script', function (container, componentState) {
@@ -212,7 +200,7 @@ layout.registerComponent('Script', function (container, componentState) {
 ipcRenderer.on('openComponent', (event, arg) => {
     if ([ 'Scene', 'Game', 'Sidebar', 'Script' ].indexOf(arg) < 0)
         return ;
-    layout.root.contentItems[0].addChild({ type: 'component', componentName: arg, componentState: {  } });
+    layout.root.contentItems[0].addChild({ type: 'component', componentName: arg, componentState: {  } }, 0);
 });
 
 layout.init();

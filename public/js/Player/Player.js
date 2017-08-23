@@ -13,7 +13,7 @@ let Player = function (editor, container) {
 
 	//
 
-	let player = new APP.Player();
+	let player = new APP.Player(editor, container);
 	container.dom.appendChild(player.dom);
 
 	//

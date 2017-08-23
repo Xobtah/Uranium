@@ -41,20 +41,25 @@ let template = [
         submenu: [
             {
                 label: 'Group',
-                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Group') }
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Group'); }
             },
             { type: 'separator' },
             {
                 label: 'Plane',
-                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Plane') }
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Plane'); }
             },
             {
                 label: 'Box',
-                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Box') }
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Box'); }
             },
             {
                 label: 'Sphere',
-                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Sphere') }
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'Sphere'); }
+            },
+            { type: 'separator' },
+            {
+                label: 'PointLight',
+                click(item, focusedWindow) { focusedWindow.webContents.send('add', 'PointLight'); }
             }
         ]
     },

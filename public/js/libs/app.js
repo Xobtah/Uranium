@@ -4,7 +4,7 @@
 
 let APP = {
 
-	Player: function () {
+	Player: function (editor, container) {
 		let loader = new THREE.ObjectLoader();
 		let camera, scene, renderer;
 
@@ -21,7 +21,7 @@ let APP = {
 			isVR = json.project.vr;
 
 			renderer = new THREE.WebGLRenderer({ antialias: true });
-			renderer.setClearColor(0x000000);
+            renderer.setClearColor(0x000000);
 			renderer.setPixelRatio(window.devicePixelRatio);
 
 			if (json.project.gammaInput)
@@ -41,16 +41,10 @@ let APP = {
 
 			events = {
 				init: [],
-				start: [],
-				stop: [],
-				keydown: [],
-				keyup: [],
-				mousedown: [],
-				mouseup: [],
-				mousemove: [],
-				touchstart: [],
-				touchend: [],
-				touchmove: [],
+				start: [], stop: [],
+				keydown: [], keyup: [],
+				mousedown: [], mouseup: [], mousemove: [],
+				touchstart: [], touchend: [], touchmove: [],
 				update: []
 			};
 
@@ -108,9 +102,10 @@ let APP = {
 				controls = new THREE.VRControls(cameraVR);
 				effect = new THREE.VREffect(renderer);
 
-				if (WEBVR.isAvailable() === true)
-					this.dom.appendChild(WEBVR.getButton(effect));
-				if ( WEBVR.isLatestAvailable() === false )
+				WEBVR.checkAvailability().then(() => {
+                    this.dom.appendChild(WEBVR.getButton(effect));
+				}).catch();
+				if (WEBVR.isLatestAvailable() === false)
 					this.dom.appendChild(WEBVR.getMessage());
 			}
 		};
@@ -154,8 +149,8 @@ let APP = {
 				controls.update();
 				effect.render(scene, cameraVR);
 			}
-			else
-				renderer.render(scene, camera);
+			else if (renderer)
+                renderer.render(scene, camera);
 
 			prevTime = time;
 		}

@@ -19,7 +19,7 @@ Sidebar.Script = function (editor, eventHub) {
 
 	let newScript = new UI.Button('New');
 	newScript.onClick(function () {
-		let script = { name: '', source: 'function update(event) {}' };
+		let script = { name: '', source: 'function update(event) {\n\t\n}' };
 		editor.execute(new AddScriptCommand(editor.selected, script));
 	});
 	container.add(newScript);
@@ -57,7 +57,7 @@ Sidebar.Script = function (editor, eventHub) {
 					let edit = new UI.Button('Edit');
 					edit.setMarginLeft('4px');
 					edit.onClick(function () {
-						eventHub.emit('editScript', object, script);
+						eventHub.emit('openScript', object, script);
 					});
 					scriptsContainer.add(edit);
 

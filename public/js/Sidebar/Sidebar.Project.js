@@ -39,9 +39,8 @@ Sidebar.Project = function (editor, eventHub) {
 
 	container.add(rendererTypeRow);
 
-	if (config.getKey('project/renderer') !== undefined) {
+	if (config.getKey('project/renderer') !== undefined)
 		rendererType.setValue(config.getKey('project/renderer'));
-	}
 
 	// antialiasing
 
@@ -115,7 +114,7 @@ Sidebar.Project = function (editor, eventHub) {
 		}
 
 		eventHub.emit('rendererChanged', renderer);
-	}
+    }
 
 	createRenderer(config.getKey('project/renderer'), config.getKey('project/renderer/antialias'), config.getKey('project/renderer/shadows'), config.getKey('project/renderer/gammaInput'), config.getKey('project/renderer/gammaOutput'));
 

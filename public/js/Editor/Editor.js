@@ -4,7 +4,10 @@
 
 let Editor = function () {
 	let ipcRenderer = require('electron').ipcRenderer;
+
 	let meshCount = 0;
+    let lightCount = 0;
+    let cameraCount = 0;
 
 	ipcRenderer.on('new', (event, arg) => {
         if (confirm('Any unsaved data will be lost. Are you sure?'))
@@ -40,6 +43,14 @@ let Editor = function () {
                 mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
                 mesh.name = 'Sphere ' + (++meshCount);
                 break;
+			case 'PointLight':
+                let color = 0xffffff;
+                let intensity = 1;
+				let distance = 0;
+
+                mesh = new THREE.PointLight(color, intensity, distance);
+                mesh.name = 'PointLight ' + (++lightCount);
+				break;
 		}
 		if (mesh)
         	this.execute(new AddObjectCommand(mesh));
@@ -67,7 +78,7 @@ let Editor = function () {
 		exitedVR: new Signal(),
 
 		// actions
-		showModal: new Signal(),
+		//showModal: new Signal(),
 
 		// notifications
 		editorCleared: new Signal(),
@@ -86,7 +97,7 @@ let Editor = function () {
 		sceneFogChanged: new Signal(),
 		sceneGraphChanged: new Signal(),
 
-		cameraChanged: new Signal(),
+		//cameraChanged: new Signal(),
 
 		geometryChanged: new Signal(),
 

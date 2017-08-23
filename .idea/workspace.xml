@@ -2,120 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf25cfc5-5bfe-477e-8e79-72ee8ce3340d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/History.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/Player/Player.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/editor/js/History.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/editor/js/Player.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/editor/js/doob_index.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/css/dark.css" afterPath="$PROJECT_DIR$/public/css/dark.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/css/light.css" afterPath="$PROJECT_DIR$/public/css/light.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/css/main.css" afterPath="$PROJECT_DIR$/public/css/main.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/docs/Implementing additional commands for undo-redo.md" afterPath="$PROJECT_DIR$/public/docs/Implementing additional commands for undo-redo.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/docs/Writing unit tests for undo-redo commands.md" afterPath="$PROJECT_DIR$/public/docs/Writing unit tests for undo-redo commands.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/examples/arkanoid.app.json" afterPath="$PROJECT_DIR$/public/examples/arkanoid.app.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/examples/camera.app.json" afterPath="$PROJECT_DIR$/public/examples/camera.app.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/examples/particles.app.json" afterPath="$PROJECT_DIR$/public/examples/particles.app.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/examples/pong.app.json" afterPath="$PROJECT_DIR$/public/examples/pong.app.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/examples/shaders.app.json" afterPath="$PROJECT_DIR$/public/examples/shaders.app.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Command.js" afterPath="$PROJECT_DIR$/public/js/Command/Command.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Config.js" afterPath="$PROJECT_DIR$/public/js/Config.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Editor.js" afterPath="$PROJECT_DIR$/public/js/Editor/Editor.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Loader.js" afterPath="$PROJECT_DIR$/public/js/Loader.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.Add.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.Add.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.Edit.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.Edit.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.Examples.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.Examples.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.File.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.File.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.Help.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.Help.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.Play.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.Play.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.Status.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.Status.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.View.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.View.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Menubar.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Script.js" afterPath="$PROJECT_DIR$/public/js/Script/Script.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Animation.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Animation.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.BoxGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.BoxGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.BufferGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.BufferGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.CircleGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.CircleGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.CylinderGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.CylinderGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.Geometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.Geometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.IcosahedronGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.IcosahedronGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.LatheGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.LatheGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.Modifiers.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.Modifiers.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.PlaneGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.PlaneGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.SphereGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.SphereGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.TeapotBufferGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.TeapotBufferGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.TorusGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.TorusGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.TorusKnotGeometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.TorusKnotGeometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Geometry.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Geometry.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.History.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.History.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Material.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Material.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Object.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Object.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Project.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Project.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Properties.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Properties.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Scene.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Scene.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Script.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Script.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.Settings.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Settings.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Sidebar.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Storage.js" afterPath="$PROJECT_DIR$/public/js/Storage.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Toolbar.js" afterPath="$PROJECT_DIR$/public/js/Toolbar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Viewport.Info.js" afterPath="$PROJECT_DIR$/public/js/Viewport/Viewport.Info.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/Viewport.js" afterPath="$PROJECT_DIR$/public/js/Viewport/Viewport.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/AddObjectCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/AddObjectCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/AddScriptCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/AddScriptCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/MoveObjectCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/MoveObjectCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/MultiCmdsCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/MultiCmdsCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/RemoveObjectCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/RemoveObjectCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/RemoveScriptCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/RemoveScriptCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetColorCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetColorCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetGeometryCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetGeometryCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetGeometryValueCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetGeometryValueCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetMaterialColorCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetMaterialColorCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetMaterialCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetMaterialCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetMaterialMapCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetMaterialMapCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetMaterialValueCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetMaterialValueCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetPositionCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetPositionCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetRotationCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetRotationCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetScaleCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetScaleCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetSceneCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetSceneCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetScriptValueCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetScriptValueCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetUuidCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetUuidCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/commands/SetValueCommand.js" afterPath="$PROJECT_DIR$/public/js/Command/SetValueCommand.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/index.js" afterPath="$PROJECT_DIR$/public/js/uranium235.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/acorn/acorn.js" afterPath="$PROJECT_DIR$/public/js/libs/acorn/acorn.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/acorn/acorn_loose.js" afterPath="$PROJECT_DIR$/public/js/libs/acorn/acorn_loose.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/acorn/walk.js" afterPath="$PROJECT_DIR$/public/js/libs/acorn/walk.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/app.js" afterPath="$PROJECT_DIR$/public/js/libs/app.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/app/index.html" afterPath="$PROJECT_DIR$/public/js/libs/app/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/addon/dialog.css" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/addon/dialog.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/addon/dialog.js" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/addon/dialog.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/addon/show-hint.css" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/addon/show-hint.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/addon/show-hint.js" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/addon/show-hint.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/addon/tern.css" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/addon/tern.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/addon/tern.js" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/addon/tern.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/codemirror.css" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/codemirror.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/codemirror.js" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/codemirror.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/mode/glsl.js" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/mode/glsl.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/mode/javascript.js" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/mode/javascript.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/codemirror/theme/monokai.css" afterPath="$PROJECT_DIR$/public/js/libs/codemirror/theme/monokai.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/esprima.js" afterPath="$PROJECT_DIR$/public/js/libs/esprima.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/glslprep.min.js" afterPath="$PROJECT_DIR$/public/js/libs/glslprep.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/html2canvas.js" afterPath="$PROJECT_DIR$/public/js/libs/html2canvas.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/jsonlint.js" afterPath="$PROJECT_DIR$/public/js/libs/jsonlint.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/signals.min.js" afterPath="$PROJECT_DIR$/public/js/libs/signals.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/tern-threejs/threejs.js" afterPath="$PROJECT_DIR$/public/js/libs/tern-threejs/threejs.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ternjs/comment.js" afterPath="$PROJECT_DIR$/public/js/libs/ternjs/comment.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ternjs/def.js" afterPath="$PROJECT_DIR$/public/js/libs/ternjs/def.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ternjs/doc_comment.js" afterPath="$PROJECT_DIR$/public/js/libs/ternjs/doc_comment.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ternjs/infer.js" afterPath="$PROJECT_DIR$/public/js/libs/ternjs/infer.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ternjs/polyfill.js" afterPath="$PROJECT_DIR$/public/js/libs/ternjs/polyfill.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ternjs/signal.js" afterPath="$PROJECT_DIR$/public/js/libs/ternjs/signal.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ternjs/tern.js" afterPath="$PROJECT_DIR$/public/js/libs/ternjs/tern.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/three.html.js" afterPath="$PROJECT_DIR$/public/js/libs/three.html.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ui.js" afterPath="$PROJECT_DIR$/public/js/libs/ui.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/editor/js/libs/ui.three.js" afterPath="$PROJECT_DIR$/public/js/libs/ui.three.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/Editor/Config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/Editor/Loader.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/Editor/Storage.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/Config.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/Loader.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/Storage.js" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/History.js" afterPath="$PROJECT_DIR$/public/js/Editor/History.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/Toolbar.js" afterPath="$PROJECT_DIR$/public/js/Toolbar/Toolbar.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/uranium235.js" afterPath="$PROJECT_DIR$/public/js/u235.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Uranium.iml" afterPath="$PROJECT_DIR$/.idea/Uranium.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/electron/main.js" afterPath="$PROJECT_DIR$/electron/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/electron/menu.js" afterPath="$PROJECT_DIR$/electron/menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/dark.css" afterPath="$PROJECT_DIR$/public/css/dark.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/light.css" afterPath="$PROJECT_DIR$/public/css/light.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Editor/Editor.js" afterPath="$PROJECT_DIR$/public/js/Editor/Editor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Menubar/Menubar.Add.js" afterPath="$PROJECT_DIR$/public/js/Menubar/Menubar.Add.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Player/Player.js" afterPath="$PROJECT_DIR$/public/js/Player/Player.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Script/Script.js" afterPath="$PROJECT_DIR$/public/js/Script/Script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Material.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Material.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Project.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Project.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Script.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.js" afterPath="$PROJECT_DIR$/public/js/Sidebar/Sidebar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Viewport/Viewport.js" afterPath="$PROJECT_DIR$/public/js/Viewport/Viewport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/libs/app.js" afterPath="$PROJECT_DIR$/public/js/libs/app.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -129,51 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="uranium235.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/js/uranium235.js">
+      <file leaf-file-name="u235.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/u235.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="193" column="98" lean-forward="false" selection-start-line="193" selection-start-column="98" selection-end-line="193" selection-end-column="98" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Script.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/Script/Script.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6000">
-              <caret line="300" column="4" lean-forward="false" selection-start-line="300" selection-start-column="4" selection-end-line="300" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SetScriptValueCommand.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/Command/SetScriptValueCommand.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="32" column="28" lean-forward="false" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sidebar.Script.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Script.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1060">
-              <caret line="53" column="23" lean-forward="false" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Editor.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/Editor/Editor.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="135" column="22" lean-forward="false" selection-start-line="135" selection-start-column="22" selection-end-line="135" selection-end-column="22" />
+            <state relative-caret-position="358">
+              <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -183,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/public/js/Viewport/Viewport.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="380">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -192,8 +68,38 @@
       <file leaf-file-name="Sidebar.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="28" column="49" lean-forward="false" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+            <state relative-caret-position="696">
+              <caret line="73" column="7" lean-forward="false" selection-start-line="73" selection-start-column="7" selection-end-line="73" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sidebar.Project.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Project.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="402">
+              <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Editor.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/Editor/Editor.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="80" column="10" lean-forward="false" selection-start-line="80" selection-start-column="10" selection-end-line="80" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Menubar.Add.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/Menubar/Menubar.Add.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="500">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -211,36 +117,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>theme</find>
-      <find>signals.themeChanged</find>
-      <find>themec</find>
-      <find>let</find>
-      <find>option</find>
-      <find>play</find>
-      <find>width</find>
-      <find>resize</find>
-      <find>this.stop</find>
-      <find>this.dispo</find>
-      <find>edit</find>
-      <find>renderer</find>
-      <find>signals.editScript</find>
-      <find>startPlayer</find>
-      <find>signals.startPlayer</find>
+      <find>new Storage()</find>
+      <find>new History(this)</find>
+      <find>loader</find>
+      <find>fromJSON</find>
+      <find>new Loader(this)</find>
+      <find>new Config</find>
+      <find>click</find>
+      <find>rotateOnAxis</find>
+      <find>mousemove</find>
+      <find>'window</find>
+      <find>eventhub</find>
       <find>rendererChanged</find>
+      <find>validate(</find>
+      <find>rendererchan</find>
+      <find>isava</find>
+      <find>getProgramInfoLog</find>
+      <find>isa</find>
+      <find>rendererchang</find>
+      <find>checkAvailability</find>
+      <find>update</find>
+      <find>update(</find>
+      <find>cameraChanged</find>
       <find>enterVR</find>
-      <find>enteredVR</find>
-      <find>windowResize</find>
-      <find>scriptAdded</find>
-      <find>historyChanged</find>
-      <find>showModal</find>
       <find>editorCleared</find>
-      <find>themeChanged</find>
-      <find>scriptChanged</find>
-      <find>editScript</find>
-      <find>history</find>
-      <find>signals</find>
       <find>var</find>
-      <find>render(</find>
+      <find>resize</find>
+      <find>render</find>
+      <find>renderer.render</find>
+      <find>modal</find>
+      <find>showModal</find>
     </findStrings>
     <replaceStrings>
       <replace>var</replace>
@@ -249,6 +155,7 @@
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\HAF922\Desktop\Uranium</dir>
+      <dir>C:\Users\HAF922\Desktop\Uranium-235</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -257,8 +164,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/garbage.html" />
-        <option value="$PROJECT_DIR$/editor/css/main.css" />
         <option value="$PROJECT_DIR$/editor/js/doob_index.js" />
         <option value="$PROJECT_DIR$/editor/main.js" />
         <option value="$PROJECT_DIR$/package.json" />
@@ -272,7 +177,6 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/editor/css/dark.css" />
         <option value="$PROJECT_DIR$/editor/css/light.css" />
-        <option value="$PROJECT_DIR$/electron/menu.js" />
         <option value="$PROJECT_DIR$/editor/js/Player.js" />
         <option value="$PROJECT_DIR$/editor/js/Sidebar.Project.js" />
         <option value="$PROJECT_DIR$/editor/js/Sidebar.Properties.js" />
@@ -288,8 +192,29 @@
         <option value="$PROJECT_DIR$/editor/js/index.js" />
         <option value="$PROJECT_DIR$/editor/js/Editor.js" />
         <option value="$PROJECT_DIR$/editor/index.html" />
-        <option value="$PROJECT_DIR$/electron/main.js" />
+        <option value="$PROJECT_DIR$/public/js/Toolbar.js" />
+        <option value="$PROJECT_DIR$/public/css/dark.css" />
+        <option value="$PROJECT_DIR$/public/css/light.css" />
+        <option value="$PROJECT_DIR$/public/js/Storage.js" />
+        <option value="$PROJECT_DIR$/public/js/Loader.js" />
+        <option value="$PROJECT_DIR$/public/js/Config.js" />
+        <option value="$PROJECT_DIR$/public/js/Viewport/Viewport2.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/public/js/Menubar/Menubar.View.js" />
+        <option value="$PROJECT_DIR$/public/js/Sidebar/Sidebar.js" />
+        <option value="$PROJECT_DIR$/electron/main.js" />
+        <option value="$PROJECT_DIR$/public/js/Player/Player.js" />
+        <option value="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Project.js" />
+        <option value="$PROJECT_DIR$/public/js/uranium235.js" />
+        <option value="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Script.js" />
+        <option value="$PROJECT_DIR$/public/js/Script/Script.js" />
+        <option value="$PROJECT_DIR$/public/js/libs/app.js" />
+        <option value="$PROJECT_DIR$/public/js/Viewport/Viewport.js" />
+        <option value="$PROJECT_DIR$/public/js/Sidebar/Sidebar.Material.js" />
+        <option value="$PROJECT_DIR$/electron/menu.js" />
+        <option value="$PROJECT_DIR$/public/js/Menubar/Menubar.Add.js" />
+        <option value="$PROJECT_DIR$/public/js/Editor/Editor.js" />
+        <option value="$PROJECT_DIR$/public/js/u235.js" />
       </list>
     </option>
   </component>
@@ -311,7 +236,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="260" />
     <option name="y" value="20" />
     <option name="width" value="1400" />
@@ -337,22 +262,22 @@
         <subPane>
           <expand>
             <path>
-              <item name="Uranium" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Uranium" type="462c0819:PsiDirectoryNode" />
+              <item name="Uranium-235" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Uranium-235" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Uranium" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Uranium" type="462c0819:PsiDirectoryNode" />
+              <item name="Uranium-235" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Uranium-235" type="462c0819:PsiDirectoryNode" />
               <item name="electron" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Uranium" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Uranium" type="462c0819:PsiDirectoryNode" />
+              <item name="Uranium-235" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Uranium-235" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Uranium" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Uranium" type="462c0819:PsiDirectoryNode" />
+              <item name="Uranium-235" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Uranium-235" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -374,12 +299,15 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HAF922\Desktop\Uranium-235\public\js\Viewport" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\HAF922\Desktop\Uranium-235\public\js\Editor" />
+      <recent name="C:\Users\HAF922\Desktop\Uranium-235\public\js\Toolbar" />
       <recent name="C:\Users\HAF922\Desktop\Uranium\public\js\Command" />
       <recent name="C:\Users\HAF922\Desktop\Uranium\public\js\Player" />
       <recent name="C:\Users\HAF922\Desktop\Uranium\public\js\Script" />
-      <recent name="C:\Users\HAF922\Desktop\Uranium\public\js\Editor" />
-      <recent name="C:\Users\HAF922\Desktop\Uranium\public\js\Menubar" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -449,6 +377,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="cf25cfc5-5bfe-477e-8e79-72ee8ce3340d" name="Default" comment="" />
@@ -470,25 +401,33 @@
       <workItem from="1502971554273" duration="9585000" />
       <workItem from="1503045300162" duration="1882000" />
       <workItem from="1503064526760" duration="1419000" />
+      <workItem from="1503066241326" duration="10100000" />
+      <workItem from="1503137463212" duration="7219000" />
+      <workItem from="1503221964164" duration="7513000" />
+      <workItem from="1503317999665" duration="592000" />
+      <workItem from="1503330550901" duration="1767000" />
+      <workItem from="1503335930289" duration="10022000" />
+      <workItem from="1503422521956" duration="9885000" />
+      <workItem from="1503484723518" duration="10610000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83593000" />
+    <option name="totallyTimeSpent" value="141301000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29427084" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29427084" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23802084" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24270834" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3515625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -513,44 +452,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/electron/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uranium.js" />
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3706">
-          <caret line="218" column="0" lean-forward="true" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Viewport/Viewport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Script/Script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -595,13 +496,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/libs/codemirror/codemirror.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="61" column="11" lean-forward="false" selection-start-line="61" selection-start-column="11" selection-end-line="61" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/garbage.html" />
     <entry file="file://$PROJECT_DIR$/node_modules/golden-layout/src/css/goldenlayout-dark-theme.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -617,25 +511,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/uranium.js" />
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="6" column="43" lean-forward="false" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Toolbar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="29" column="23" lean-forward="true" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -667,24 +547,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Menubar/Menubar.Add.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2740">
-          <caret line="137" column="36" lean-forward="true" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/libs/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="780">
           <caret line="39" column="33" lean-forward="false" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Viewport/Viewport.Info.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="38" lean-forward="true" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -695,48 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/dark.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1760">
-          <caret line="136" column="23" lean-forward="false" selection-start-line="136" selection-start-column="23" selection-end-line="136" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/light.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1760">
-          <caret line="133" column="23" lean-forward="false" selection-start-line="133" selection-start-column="23" selection-end-line="133" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/electron/menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="102" column="14" lean-forward="false" selection-start-line="102" selection-start-column="14" selection-end-line="102" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/libs/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="196" column="0" lean-forward="true" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Player/Player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Project.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Properties.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -744,25 +568,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="28" column="49" lean-forward="false" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Settings.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Material.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="153" column="69" lean-forward="true" selection-start-line="153" selection-start-column="69" selection-end-line="153" selection-end-column="69" />
         </state>
       </provider>
     </entry>
@@ -777,29 +586,149 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
           <caret line="32" column="28" lean-forward="false" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/doob_index.js" />
+    <entry file="file://$PROJECT_DIR$/public/js/Viewport/Viewport.Info.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/History.js">
+    <entry file="file://$PROJECT_DIR$/public/css/dark.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
+        <state relative-caret-position="140">
+          <caret line="181" column="21" lean-forward="false" selection-start-line="181" selection-start-column="21" selection-end-line="181" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/light.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="179" column="16" lean-forward="true" selection-start-line="179" selection-start-column="16" selection-end-line="179" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Toolbar/Toolbar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="21" column="7" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Editor/Storage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-280">
+          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Editor/History.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4640">
           <caret line="232" column="30" lean-forward="true" selection-start-line="232" selection-start-column="30" selection-end-line="232" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Editor/Loader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="380" column="22" lean-forward="true" selection-start-line="380" selection-start-column="22" selection-end-line="380" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Editor/Config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/three/src/core/Object3D.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3054">
+          <caret line="152" column="4" lean-forward="false" selection-start-line="152" selection-start-column="4" selection-end-line="152" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/libs/codemirror/codemirror.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="3824" column="0" lean-forward="true" selection-start-line="3824" selection-start-column="0" selection-end-line="3824" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Viewport/Viewport2.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/three/examples/js/vr/WebVR.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Menubar/Menubar.View.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="27" column="46" lean-forward="false" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="139" column="55" lean-forward="false" selection-start-line="139" selection-start-column="55" selection-end-line="139" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/electron/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Project.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="104" column="0" lean-forward="true" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1060">
-          <caret line="53" column="23" lean-forward="false" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+        <state relative-caret-position="459">
+          <caret line="59" column="68" lean-forward="true" selection-start-line="59" selection-start-column="68" selection-end-line="59" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Script/Script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6000">
-          <caret line="300" column="4" lean-forward="false" selection-start-line="300" selection-start-column="4" selection-end-line="300" selection-end-column="4" />
+        <state relative-caret-position="596">
+          <caret line="301" column="4" lean-forward="false" selection-start-line="301" selection-start-column="4" selection-end-line="301" selection-end-column="4" />
+          <folding>
+            <element signature="e#2437#5608#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/libs/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3020">
+          <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Player/Player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -807,55 +736,63 @@
     <entry file="file://$PROJECT_DIR$/public/js/Viewport/Viewport.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.Material.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="493" column="14" lean-forward="false" selection-start-line="493" selection-start-column="14" selection-end-line="493" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Sidebar/Sidebar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="73" column="7" lean-forward="false" selection-start-line="73" selection-start-column="7" selection-end-line="73" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/electron/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Menubar/Menubar.Add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/golden-layout/dist/goldenlayout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="1657" column="0" lean-forward="true" selection-start-line="1657" selection-start-column="0" selection-end-line="1657" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/Editor/Editor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="135" column="22" lean-forward="false" selection-start-line="135" selection-start-column="22" selection-end-line="135" selection-end-column="22" />
+        <state relative-caret-position="160">
+          <caret line="80" column="10" lean-forward="false" selection-start-line="80" selection-start-column="10" selection-end-line="80" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/doob_index.js">
+    <entry file="file://$PROJECT_DIR$/public/js/u235.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-640">
-          <caret line="7" column="2" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Menubar/Menubar.View.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/electron/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/uranium235.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="193" column="98" lean-forward="false" selection-start-line="193" selection-start-column="98" selection-end-line="193" selection-end-column="98" />
+        <state relative-caret-position="358">
+          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
           <folding />
         </state>
       </provider>

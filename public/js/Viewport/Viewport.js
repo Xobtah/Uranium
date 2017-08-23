@@ -14,9 +14,17 @@ let Viewport = function (editor, container) {
     let viewportInfoDom = document.createElement('div');
 	container.dom.append((new Viewport.Info(editor, viewportInfoDom)).dom);
 
+    container.dom.append((new Toolbar(editor)).dom);
+
 	//
 
-	let renderer = null;
+	let renderer = new THREE.WebGLRenderer({ antialias: true });
+
+    renderer.autoClear = false;
+    renderer.autoUpdateScene = false;
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    container.dom.appendChild(renderer.domElement);
 
 	let camera = editor.camera;
 	let scene = editor.scene;
@@ -28,11 +36,11 @@ let Viewport = function (editor, container) {
 
 	let vrEffect, vrControls;
 
-	if (WEBVR.isAvailable() === true) {
-		let vrCamera = new THREE.PerspectiveCamera();
-		vrCamera.projectionMatrix = camera.projectionMatrix;
-		camera.add(vrCamera);
-	}
+    WEBVR.checkAvailability().then(() => {
+        let vrCamera = new THREE.PerspectiveCamera();
+        vrCamera.projectionMatrix = camera.projectionMatrix;
+        camera.add(vrCamera);
+	}).catch(() => {});
 
 	// helpers
 
@@ -188,7 +196,7 @@ let Viewport = function (editor, container) {
 	let controls = new THREE.EditorControls(camera, container.dom);
 	controls.addEventListener('change', function () {
 		transformControls.update();
-		signals.cameraChanged.dispatch(camera);
+		eventHub.emit('cameraChanged', camera);
 	});
 
 	// signals
@@ -230,34 +238,33 @@ let Viewport = function (editor, container) {
 		transformControls.setSpace(space);
 	});
 
-	eventHub.on('rendererChanged', (newRenderer) => {
+	/*eventHub.on('rendererChanged', (newRenderer) => {
         if (renderer !== null)
             container.dom.removeChild(renderer.domElement);
         renderer = newRenderer;
         renderer.autoClear = false;
         renderer.autoUpdateScene = false;
         renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(container.dom.offsetWidth, container.dom.offsetHeight);
 
         container.dom.appendChild(renderer.domElement);
 
-        if (WEBVR.isAvailable() === true) {
+        WEBVR.checkAvailability().then(() => {
             vrControls = new THREE.VRControls(vrCamera);
             vrEffect = new THREE.VREffect(renderer);
             window.addEventListener('vrdisplaypresentchange', function (event) {
                 effect.isPresenting ? signals.enteredVR.dispatch() : signals.exitedVR.dispatch();
             }, false);
-        }
+        }).catch(() => {});
         render();
-	});
+	});*/
 
 	signals.sceneGraphChanged.add(function () {
 		render();
 	});
 
-	signals.cameraChanged.add(function () {
-		render();
-	});
+	eventHub.on('cameraChanged', () => {
+        render();
+    });
 
 	signals.objectSelected.add(function (object) {
 		selectionBox.visible = false;
@@ -393,6 +400,8 @@ let Viewport = function (editor, container) {
 			vrEffect.render(sceneHelpers, vrCamera);
 		}
 		else {
+			if (renderer === null)
+				return ;
 			renderer.render(scene, camera);
 			if (renderer instanceof THREE.RaytracingRenderer === false)
 				renderer.render(sceneHelpers, camera);

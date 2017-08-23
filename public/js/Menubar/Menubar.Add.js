@@ -301,13 +301,13 @@ Menubar.Add = function ( editor ) {
 	option.onClick( function () {
 
 		var color = 0xffffff;
-		var intensity = 1;
-		var distance = 0;
+        var intensity = 1;
+        var distance = 0;
 
-		var light = new THREE.PointLight( color, intensity, distance );
-		light.name = 'PointLight ' + ( ++ lightCount );
+        var light = new THREE.PointLight( color, intensity, distance );
+        light.name = 'PointLight ' + ( ++ lightCount );
 
-		editor.execute( new AddObjectCommand( light ) );
+        editor.execute( new AddObjectCommand( light ) );
 
 	} );
 	options.add( option );

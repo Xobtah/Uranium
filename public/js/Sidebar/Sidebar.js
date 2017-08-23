@@ -30,18 +30,15 @@ let Sidebar = function (editor, container) {
 		new Sidebar.Animation(editor),
 		new Sidebar.Script(editor, eventHub)
 	);
-	//container.add(scene);
 	container.dom.append(scene.dom);
 
 	let project = new UI.Span().add(new Sidebar.Project(editor, eventHub));
-	//container.add(project);
 	container.dom.append(project.dom);
 
 	let settings = new UI.Span().add(
 		new Sidebar.Settings(editor),
 		new Sidebar.History(editor)
 	);
-	//container.add(settings);
 	container.dom.append(settings.dom);
 
 	//
@@ -71,6 +68,10 @@ let Sidebar = function (editor, container) {
 		}
 	}
 	select('SCENE');
+
+	container.on('resize', () => {
+		container.dom.style.width = container.width + 'px';
+	});
 
 	return (container);
 };

@@ -172,13 +172,13 @@ select {
 	}
 
 #toolbar {
+	overflow: hidden;
 	position: absolute;
-	left: 0;
-	right: 300px;
-	bottom: 0;
-	height: 32px;
+	height: 25px;
+	width: 100%;
 	background: #eee;
 	color: #333;
+	font-size: 0.7em;
 }
 
 	#toolbar * {
@@ -186,12 +186,11 @@ select {
 	}
 
 	#toolbar .Panel {
-		padding: 4px;
 		color: #888;
 	}
 
 	#toolbar button {
-		margin-right: 6px;
+		margin-right: 1px;
 	}
 
 .Outliner {
