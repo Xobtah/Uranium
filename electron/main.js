@@ -14,7 +14,7 @@ function createWindow() {
 		width: screenDimensions.width * 0.75,
 		height: screenDimensions.height * 0.75
 	});
-	//mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
 	mainWindow.setMenu(null);
 	mainWindow.loadURL(url.format({
 		pathname: path.join(__dirname, '..', 'public', 'index.html'),
@@ -24,7 +24,7 @@ function createWindow() {
 	mainWindow.on('closed', function () {
 		mainWindow = null;
 	});
-	require('./menu');
+	//require('./menu');
 }
 
 app.on('ready', createWindow);

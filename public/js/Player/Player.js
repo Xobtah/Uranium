@@ -3,8 +3,8 @@
  */
 
 let Player = function (editor, container) {
-    let ipcRenderer = require('electron').ipcRenderer;
     let eventHub = container.layoutManager.eventHub;
+    let signals = editor.signals;
 
     container.dom = container.getElement()[0];
     container.dom.className = 'Panel';
@@ -18,7 +18,8 @@ let Player = function (editor, container) {
 
 	//
 
-    ipcRenderer.on('playStop', (event, arg) => arg ? eventHub.emit('startPlayer') : eventHub.emit('stopPlayer'));
+	signals.startPlayer.add(() => eventHub.emit('startPlayer'));
+	signals.stopPlayer.add(() => eventHub.emit('stopPlayer'));
 
 	container.on('resize', () => {
         player.setSize(container.dom.clientWidth, container.dom.clientHeight);

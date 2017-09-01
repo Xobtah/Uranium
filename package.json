@@ -1,10 +1,11 @@
 {
-  "name": "uranium",
+  "name": "uranium-235",
   "version": "0.0.0",
   "description": "Game Engine",
-  "main": "uranium.js",
+  "main": "public/index.html",
   "scripts": {
-    "electron": "electron electron/main.js"
+    "electron": "electron electron/main.js",
+    "nw": "nw nw/main.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "dependencies": {
     "electron": "^1.6.11",
     "golden-layout": "^1.5.9",
+    "nw": "^0.24.4",
     "three": "^0.86.0"
   }
 }

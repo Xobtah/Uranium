@@ -3,59 +3,6 @@
  */
 
 let Editor = function () {
-	let ipcRenderer = require('electron').ipcRenderer;
-
-	let meshCount = 0;
-    let lightCount = 0;
-    let cameraCount = 0;
-
-	ipcRenderer.on('new', (event, arg) => {
-        if (confirm('Any unsaved data will be lost. Are you sure?'))
-            this.clear();
-	});
-
-	ipcRenderer.on('add', (event, arg) => {
-        let geometry = null, material = null, mesh = null;
-
-		switch (arg) {
-			case 'Group':
-                mesh = new THREE.Group();
-                mesh.name = 'Group ' + (++meshCount);
-                break;
-			case 'Plane':
-                geometry = new THREE.PlaneBufferGeometry(2, 2);
-                material = new THREE.MeshStandardMaterial();
-                mesh = new THREE.Mesh(geometry, material);
-                mesh.name = 'Plane ' + (++meshCount);
-				break;
-            case 'Box':
-                geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-                mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
-                mesh.name = 'Box ' + (++meshCount);
-                break;
-            case 'Sphere':
-                let radius = 1;
-                let widthSegments = 32, heightSegments = 16;
-                let phiStart = 0, phiLength = Math.PI * 2;
-                let thetaStart = 0, thetaLength = Math.PI;
-
-                geometry = new THREE.SphereBufferGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
-                mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
-                mesh.name = 'Sphere ' + (++meshCount);
-                break;
-			case 'PointLight':
-                let color = 0xffffff;
-                let intensity = 1;
-				let distance = 0;
-
-                mesh = new THREE.PointLight(color, intensity, distance);
-                mesh.name = 'PointLight ' + (++lightCount);
-				break;
-		}
-		if (mesh)
-        	this.execute(new AddObjectCommand(mesh));
-	});
-
 	this.DEFAULT_CAMERA = new THREE.PerspectiveCamera(50, 1, 0.1, 10000);
 	this.DEFAULT_CAMERA.name = 'Camera';
 	this.DEFAULT_CAMERA.position.set(20, 10, 20);
@@ -68,8 +15,8 @@ let Editor = function () {
 		//editScript: new Signal(),
 
 		// player
-		startPlayer: new Signal(),//
-		stopPlayer: new Signal(),//
+		startPlayer: new Signal(),
+		stopPlayer: new Signal(),
 
 		// vr
 		enterVR: new Signal(),

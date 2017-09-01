@@ -3,7 +3,7 @@ window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.Mo
 
 Number.prototype.format = function () { return (this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")); };
 
-let { ipcRenderer } = require('electron');
+//let { ipcRenderer } = require('electron');
 let config = {
     content: [ {
         type: 'row',
@@ -31,7 +31,10 @@ let config = {
 };
 let layout = new GoldenLayout(config);
 let editor = new Editor();
+let menubar = new Menubar(editor);
 //let modal = new UI.Modal(editor);
+
+document.body.append(menubar.dom);
 
 editor.setTheme(editor.config.getKey('theme'));
 editor.storage.init(() => {
@@ -197,10 +200,10 @@ layout.registerComponent('Script', function (container, componentState) {
     new Script(editor, container);
 });
 
-ipcRenderer.on('openComponent', (event, arg) => {
+/*ipcRenderer.on('openComponent', (event, arg) => {
     if ([ 'Scene', 'Game', 'Sidebar', 'Script' ].indexOf(arg) < 0)
         return ;
     layout.root.contentItems[0].addChild({ type: 'component', componentName: arg, componentState: {  } }, 0);
-});
+});*/
 
 layout.init();
