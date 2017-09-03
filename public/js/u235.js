@@ -116,7 +116,7 @@ document.addEventListener('dragover', (event) => {
 document.addEventListener('drop', (event) => {
     event.preventDefault();
     if (event.dataTransfer.files.length > 0)
-        editor.loader.loadFile( event.dataTransfer.files[0]);
+        editor.loader.loadFile(event.dataTransfer.files[0]);
 }, false);
 
 document.addEventListener('keydown', (event) => {

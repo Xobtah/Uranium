@@ -4,6 +4,19 @@
 
 let Project = function (editor, container) {
     let jstreeDiv = null;
+    let jstreeTheme = null;
+
+    switch (editor.config.getKey('theme')) {
+        case 'css/light.css':
+            jstreeTheme = 'default';
+            break;
+        case 'css/dark.css':
+            jstreeTheme = 'default-dark';
+            break;
+        default:
+            jstreeTheme = 'default';
+            break;
+    }
 
     $(document).ready(() => {
         jstreeDiv = $('#jstree');
@@ -11,7 +24,7 @@ let Project = function (editor, container) {
         jstreeDiv.jstree({
             core: {
                 themes: {
-                    name: 'default-dark',
+                    name: jstreeTheme,
                     dots: true,
                     icons: true
                 },
