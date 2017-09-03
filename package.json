@@ -4,6 +4,7 @@
   "description": "Game Engine",
   "main": "public/index.html",
   "scripts": {
+    "start": "sudo nodemon uranium-235.js",
     "electron": "electron electron/main.js",
     "nw": "nw nw/main.js"
   },
@@ -18,9 +19,11 @@
   },
   "homepage": "https://github.com/Xobtah/Uranium#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "electron": "^1.6.11",
     "express": "^4.15.4",
     "golden-layout": "^1.5.9",
+    "jstree": "^3.3.4",
     "nw": "^0.24.4",
     "three": "^0.86.0"
   }

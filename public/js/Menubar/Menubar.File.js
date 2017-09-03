@@ -23,16 +23,43 @@ Menubar.File = function (editor) {
 	options.setClass('options');
 	container.add(options);
 
-	// New
+	// New Scene
 
 	var option = new UI.Row();
 	option.setClass('option');
-	option.setTextContent('New');
+	option.setTextContent('New Scene');
 	option.onClick(() => {
-		if (confirm('Any unsaved data will be lost. Are you sure?'))
-			editor.clear();
+        let sceneName = null;
+
+		if (confirm('Any unsaved data will be lost. Are you sure?')) {
+			sceneName = prompt('Name your new scene:');
+            if (sceneName.length) {
+                editor.clear();
+                editor.scene.name = sceneName;
+            }
+		}
 	});
 	options.add(option);
+
+    // Save Scene
+
+    var option = new UI.Row();
+    option.setClass('option');
+    option.setTextContent('Save Scene');
+    option.onClick(() => {
+        let start = performance.now();
+        let xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = function () {
+            console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'Saved scene to application. ' + (performance.now() - start).toFixed(2) + 'ms');
+        };
+        //'http://localhost:235/state'
+        xmlHttp.open('POST', '/state', true);
+        xmlHttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xmlHttp.send(JSON.stringify({ name: editor.scene.name, data: JSON.stringify(editor.toJSON()) }));
+        //$.post('/state', editor.toJSON(), console.log);
+    });
+    options.add(option);
 
 	//
 

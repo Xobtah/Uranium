@@ -64,16 +64,19 @@ let Editor = function () {
 		scriptChanged: new Signal(),
 		scriptRemoved: new Signal(),
 
-		windowResize: new Signal(),//
+		//windowResize: new Signal(),
 
 		showGridChanged: new Signal(),
 		refreshSidebarObject3D: new Signal(),
 		historyChanged: new Signal()
 	};
 
-	this.config = new Config('threejs-editor');
+	let name = 'Uranium 235';
+
+	this.projectPath = null;
+	this.config = new Config(name);
 	this.history = new History(this);
-	this.storage = new Storage();
+	this.storage = new Storage(name);
 	this.loader = new Loader(this);
 
 	this.camera = this.DEFAULT_CAMERA.clone();

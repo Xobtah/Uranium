@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-let Storage = function () {
+let Storage = function (name) {
 	let indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
 	if (indexedDB === undefined ) {
@@ -10,7 +10,6 @@ let Storage = function () {
 		return ({ init: function () {}, get: function () {}, set: function () {}, clear: function () {} });
 	}
 
-	let name = 'threejs-editor';
 	let version = 1;
 
 	let database;

@@ -9,7 +9,7 @@ Viewport.Info = function (editor, dom) {
 	container.dom.id = 'info';
 	container.dom.style.position = 'absolute';
 	container.dom.style.left = '10px';
-	container.dom.style.bottom = '10px';
+	container.dom.style.top = '30px';
 	container.dom.style.fontSize = '12px';
 	container.dom.style.color = '#fff';
 

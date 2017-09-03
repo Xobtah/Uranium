@@ -7,10 +7,15 @@ Number.prototype.format = function () { return (this.toString().replace(/(\d)(?=
 let config = {
     content: [ {
         type: 'row',
-        content: [  {
-            type: 'column',
+        content: [ {
+            type: 'row',
             content: [ {
-                type: 'column',
+                type: 'component',
+                componentName: 'Project',
+                componentState: {  },
+                width: 15
+            }, {
+                type: 'stack',
                 content: [ {
                     type: 'component',
                     componentName: 'Scene',
@@ -37,20 +42,26 @@ let menubar = new Menubar(editor);
 document.body.append(menubar.dom);
 
 editor.setTheme(editor.config.getKey('theme'));
-function setGoldenLayoutTheme(value) {
+function setApplicationTheme(value) {
+    let jstreeDiv = $("#jstree");
+
     switch (value) {
         case 'css/light.css':
             document.getElementById('GLtheme').href = '../node_modules/golden-layout/src/css/goldenlayout-light-theme.css';
+            if (jstreeDiv)
+                jstreeDiv.jstree('set_theme', 'default');
             break;
         case 'css/dark.css':
             document.getElementById('GLtheme').href = '../node_modules/golden-layout/src/css/goldenlayout-dark-theme.css';
+            if (jstreeDiv)
+                jstreeDiv.jstree('set_theme', 'default-dark');
             break;
         default:
             break;
     }
 }
-setGoldenLayoutTheme(editor.config.getKey('theme'));
-editor.signals.themeChanged.add(setGoldenLayoutTheme);
+setApplicationTheme(editor.config.getKey('theme'));
+editor.signals.themeChanged.add(setApplicationTheme);
 
 editor.storage.init(() => {
     editor.storage.get((state) => {
@@ -213,6 +224,10 @@ layout.registerComponent('Sidebar', function (container, componentState) {
 });
 layout.registerComponent('Script', function (container, componentState) {
     new Script(editor, container);
+});
+layout.registerComponent('Project', function (container, componentState) {
+    container.getElement().html('<div id="jstree" style="background: initial"></div>');
+    new Project(editor, container);
 });
 
 /*ipcRenderer.on('openComponent', (event, arg) => {
