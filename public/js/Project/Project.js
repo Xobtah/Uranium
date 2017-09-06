@@ -30,21 +30,69 @@ let Project = function (editor, container) {
                 },
                 data: {
                     url: function (node) {
-                        return ('/assets');
+                        return ('/api/assets');
                     },
                     data: function (node) {
-                        return ({ id: node.id });
+                        return ({ path: node.id === '#' ? 'Test' : node.id });
                     }
-                }
+                },
+                check_callback: true // For Create from contextmenu to work
             },
-            'plugins': [ 'contextmenu' ]
+            plugins: [ 'contextmenu', 'dnd' ]
         });
 
         jstreeDiv.bind('dblclick.jstree', function (event) {
-            let node = $(event.target).closest('li')[0];
-            //let data = node.data('jstree');
+            let node = $(event.target).closest('li');
 
-            //console.log(node.id);
+            $.get('/api/assets', { path: node[0].id }, (data, err) => {
+                if (data.metadata && data.metadata.type === 'Scene') {
+                    editor.clear();
+                    editor.fromJSON(data);
+                }
+            });
+        });
+        jstreeDiv.bind('rename_node.jstree', (e, data) => {
+            let start = performance.now();
+            let oldPath = data.node.id;
+            let newPath = data.node.parent + '/' + data.text;
+
+            if (oldPath === data.node.parent + '/' + data.old)
+                $.ajax({
+                    url: '/api/assets', type: 'PUT',
+                    data: { path: oldPath, new: newPath },
+                    success: function (result) {
+                        console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' renamed. ' + (performance.now() - start).toFixed(2) + 'ms');
+                    }
+                });
+            else
+                $.post('/api/assets', { path: newPath }, () =>
+                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' created. ' + (performance.now() - start).toFixed(2) + 'ms'));
+            jstreeDiv.jstree(true).set_id(data.node, newPath);
+        });
+        jstreeDiv.bind('delete_node.jstree', (e, data) => {
+            let start = performance.now();
+
+            $.ajax({
+                url: '/api/assets', type: 'DELETE',
+                data: { path: data.node.id },
+                success: function (result) {
+                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' deleted. ' + (performance.now() - start).toFixed(2) + 'ms');
+                }
+            });
+        });
+        jstreeDiv.bind('move_node.jstree', (e, data) => {
+            let start = performance.now();
+            let oldPath = data.node.id;
+            let newPath = data.parent + '/' + data.node.text;
+
+            $.ajax({
+                url: '/api/assets', type: 'PUT',
+                data: { path: oldPath, new: newPath },
+                success: function (result) {
+                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' moved. ' + (performance.now() - start).toFixed(2) + 'ms');
+                }
+            });
+            jstreeDiv.jstree(true).set_id(data.node, newPath);
         });
     });
 

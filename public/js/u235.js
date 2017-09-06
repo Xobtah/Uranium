@@ -48,13 +48,11 @@ function setApplicationTheme(value) {
     switch (value) {
         case 'css/light.css':
             document.getElementById('GLtheme').href = '../node_modules/golden-layout/src/css/goldenlayout-light-theme.css';
-            if (jstreeDiv)
-                jstreeDiv.jstree('set_theme', 'default');
+            if (jstreeDiv) jstreeDiv.jstree('set_theme', 'default');
             break;
         case 'css/dark.css':
             document.getElementById('GLtheme').href = '../node_modules/golden-layout/src/css/goldenlayout-dark-theme.css';
-            if (jstreeDiv)
-                jstreeDiv.jstree('set_theme', 'default-dark');
+            if (jstreeDiv) jstreeDiv.jstree('set_theme', 'default-dark');
             break;
         default:
             break;
@@ -122,7 +120,7 @@ document.addEventListener('drop', (event) => {
 document.addEventListener('keydown', (event) => {
     switch (event.keyCode) {
         case 8: // backspace
-            event.preventDefault(); // prevent browser back
+            //event.preventDefault(); // prevent browser back
         case 46: // delete
             let object = editor.selected;
             if (confirm('Delete ' + object.name + '?') === false)
@@ -136,7 +134,7 @@ document.addEventListener('keydown', (event) => {
             else if (event.ctrlKey)
                 editor.undo();
             break;
-        case 87: // Register W for translation transform mode
+        /*case 87: // Register W for translation transform mode
             editor.signals.transformModeChanged.dispatch('translate');
             break;
         case 69: // Register E for rotation transform mode
@@ -144,7 +142,7 @@ document.addEventListener('keydown', (event) => {
             break;
         case 82: // Register R for scaling transform mode
             editor.signals.transformModeChanged.dispatch('scale');
-            break;
+            break;*/
     }
 }, false);
 

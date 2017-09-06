@@ -73,7 +73,6 @@ let Editor = function () {
 
 	let name = 'Uranium 235';
 
-	this.projectPath = null;
 	this.config = new Config(name);
 	this.history = new History(this);
 	this.storage = new Storage(name);
@@ -325,6 +324,8 @@ Editor.prototype = {
 	//
 
 	fromJSON: function (json) {
+		if (json.metadata.type !== 'Scene')
+			throw new Error('JSON data is not a scene.');
 		let loader = new THREE.ObjectLoader();
 		// backwards
 		if (json.scene === undefined) {
@@ -335,7 +336,7 @@ Editor.prototype = {
 		this.camera.copy(camera);
 		this.camera.aspect = this.DEFAULT_CAMERA.aspect;
 		this.camera.updateProjectionMatrix();
-		this.history.fromJSON( json.history );
+		this.history.fromJSON(json.history);
 		this.scripts = json.scripts;
 		this.setScene(loader.parse(json.scene));
 	},
@@ -351,7 +352,7 @@ Editor.prototype = {
 		}
 		//
 		return ({
-			metadata: {},
+			metadata: { type: 'Scene' },
 			project: {
 				gammaInput: this.config.getKey('project/renderer/gammaInput'),
 				gammaOutput: this.config.getKey('project/renderer/gammaOutput'),
