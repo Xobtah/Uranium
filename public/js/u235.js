@@ -30,7 +30,7 @@ let config = {
             type: 'component',
             componentName: 'Sidebar',
             componentState: {  },
-            width: 25
+            width: 15
         } ]
     } ]
 };
