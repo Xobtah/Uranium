@@ -49,7 +49,7 @@ Menubar.File = function (editor) {
     option.onClick(() => {
         let start = performance.now();
 
-        $.post('/api/assets', { path: 'Assets/' + editor.scene.name + '.json', data: JSON.stringify(editor.toJSON()) },
+        $.post('/api/assets', { path: 'Test/Assets/' + editor.scene.name + '.json', data: JSON.stringify(editor.toJSON()) },
 			() => console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'Saved scene to application. ' + (performance.now() - start).toFixed(2) + 'ms'));
     });
     options.add(option);
