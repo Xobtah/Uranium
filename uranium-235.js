@@ -24,7 +24,7 @@ app.post('/api/assets', (req, res) => {
 
 app.put('/api/assets', (req, res) => {
     if (req.body.path && req.body.new)
-        fs.move(path.join(__dirname, 'U235 Projects', req.body.path),
+        fs.rename(path.join(__dirname, 'U235 Projects', req.body.path),
             path.join(__dirname, 'U235 Projects', req.body.new), (err) => {
                 if (err) {
                     console.log(err);

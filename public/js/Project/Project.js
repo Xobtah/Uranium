@@ -81,14 +81,16 @@ let Project = function (editor, container) {
         jstreeDiv.bind('delete_node.jstree', (e, data) => {
             let start = performance.now();
 
-            $.ajax({
-                url: '/api/assets', type: 'DELETE',
-                data: { path: data.node.id },
-                success: function (result) {
-                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' deleted. ' + (performance.now() - start).toFixed(2) + 'ms');
-                }
-            });
-            socket.emit('fileSystemChanged');
+            if (!data.node.children.length || confirm('Do you want to delete ' + data.node.text + '?')) {
+                $.ajax({
+                    url: '/api/assets', type: 'DELETE',
+                    data: { path: data.node.id },
+                    success: function (result) {
+                        console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' deleted. ' + (performance.now() - start).toFixed(2) + 'ms');
+                    }
+                });
+                socket.emit('fileSystemChanged');
+            }
         });
 
         // Move node

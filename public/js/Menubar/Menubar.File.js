@@ -51,6 +51,8 @@ Menubar.File = function (editor) {
 
         $.post('/api/assets', { path: 'Test/Assets/' + editor.scene.name + '.json', data: JSON.stringify(editor.toJSON()) },
 			() => console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'Saved scene to application. ' + (performance.now() - start).toFixed(2) + 'ms'));
+        editor.signals.fileSystemChanged.dispatch();
+        socket.emit('fileSystemChanged');
     });
     options.add(option);
 
