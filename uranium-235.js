@@ -5,7 +5,7 @@
 let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
-let fs = require('fs');
+let fs = require('fs-extra');
 let path = require('path');
 
 app.use(express.static(__dirname + '/public'));
@@ -24,31 +24,39 @@ app.post('/api/assets', (req, res) => {
 
 app.put('/api/assets', (req, res) => {
     if (req.body.path && req.body.new)
-        fs.rename(path.join(__dirname, 'U235 Projects', req.body.path),
+        fs.move(path.join(__dirname, 'U235 Projects', req.body.path),
             path.join(__dirname, 'U235 Projects', req.body.new), (err) => {
-            if (err)
-                return (res.status(500).send(err));
-            res.sendStatus(200);
+                if (err) {
+                    console.log(err);
+                    return (res.status(500).send(err));
+                }
+                res.sendStatus(200);
         });
 });
 
 app.delete('/api/assets', (req, res) => {
-    fs.unlink(path.join(__dirname, 'U235 Projects', req.body.path), (err) => {
-        if (err)
+    fs.remove(path.join(__dirname, 'U235 Projects', req.body.path), (err) => {
+        if (err) {
+            console.log(err);
             return (res.status(500).send(err));
+        }
         res.sendStatus(200);
     });
 });
 
 app.get('/api/assets', (req, res) => {
     fs.stat(__dirname + '/U235 Projects/' + req.query.path, (err, stats) => {
-        if (err)
+        if (err) {
+            console.log(err);
             return (res.status(500).send(err));
+        }
 
         if (stats.isFile())
             fs.readFile(__dirname + '/U235 Projects/' + req.query.path, (err, data) => {
-                if (err)
-                    return (res.sendStatus(500));
+                if (err) {
+                    console.log(err);
+                    return (res.status(500).send(err));
+                }
                 res.setHeader('Content-Type', 'application/json');
                 res.send(JSON.parse(data));
             });
@@ -59,7 +67,7 @@ app.get('/api/assets', (req, res) => {
 
                 if (err) {
                     console.log(err);
-                    return (res.sendStatus(400));
+                    return (res.status(500).send(err));
                 }
 
                 files.forEach((file) => {

@@ -94,7 +94,7 @@ let Project = function (editor, container) {
         // Move node
         jstreeDiv.bind('move_node.jstree', (e, data) => {
             let start = performance.now();
-            let oldPath = data.node.id;
+            let oldPath = data.old_parent + '/' + data.node.text;
             let newPath = data.parent + '/' + data.node.text;
 
             $.ajax({
