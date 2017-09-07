@@ -17,8 +17,7 @@ app.use(bodyParser.json());
 app.post('/api/assets', (req, res) => {
     let fileContent = req.body.data ? JSON.stringify(req.body.data) : '';
 
-    fs.writeFile(path.join(__dirname, 'U235 Projects', 'Test', req.body.path), fileContent, (err) => {
-        console.log(err);
+    fs.writeFile(path.join(__dirname, 'U235 Projects', req.body.path), fileContent, (err) => {
         return (err ? res.status(500).send(err) : res.sendStatus(200));
     });
 });
@@ -85,4 +84,13 @@ app.get('/api/assets', (req, res) => {
     });
 });
 
-app.listen(80);
+let server = app.listen(80);
+let io = require('socket.io').listen(server);
+
+io.on('connection', (client) => {
+    console.log('Client connection.');
+
+    client.on('fileSystemChanged', () => client.broadcast.emit('fileSystemChanged'));
+
+    client.on('disconnect', () => {});
+});

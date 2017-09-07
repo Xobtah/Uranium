@@ -68,7 +68,9 @@ let Editor = function () {
 
 		showGridChanged: new Signal(),
 		refreshSidebarObject3D: new Signal(),
-		historyChanged: new Signal()
+		historyChanged: new Signal(),
+
+		fileSystemChanged: new Signal()
 	};
 
 	let name = 'Uranium 235';

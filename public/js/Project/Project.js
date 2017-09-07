@@ -41,6 +41,10 @@ let Project = function (editor, container) {
             plugins: [ 'contextmenu', 'dnd' ]
         });
 
+        // FileSystemChanged signal
+        editor.signals.fileSystemChanged.add(() => jstreeDiv.jstree(true).refresh());
+
+        // Double click on node
         jstreeDiv.bind('dblclick.jstree', function (event) {
             let node = $(event.target).closest('li');
 
@@ -51,6 +55,8 @@ let Project = function (editor, container) {
                 }
             });
         });
+
+        // Rename node
         jstreeDiv.bind('rename_node.jstree', (e, data) => {
             let start = performance.now();
             let oldPath = data.node.id;
@@ -68,7 +74,10 @@ let Project = function (editor, container) {
                 $.post('/api/assets', { path: newPath }, () =>
                     console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' created. ' + (performance.now() - start).toFixed(2) + 'ms'));
             jstreeDiv.jstree(true).set_id(data.node, newPath);
+            socket.emit('fileSystemChanged');
         });
+
+        // Delete node
         jstreeDiv.bind('delete_node.jstree', (e, data) => {
             let start = performance.now();
 
@@ -79,7 +88,10 @@ let Project = function (editor, container) {
                     console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' deleted. ' + (performance.now() - start).toFixed(2) + 'ms');
                 }
             });
+            socket.emit('fileSystemChanged');
         });
+
+        // Move node
         jstreeDiv.bind('move_node.jstree', (e, data) => {
             let start = performance.now();
             let oldPath = data.node.id;
@@ -93,6 +105,7 @@ let Project = function (editor, container) {
                 }
             });
             jstreeDiv.jstree(true).set_id(data.node, newPath);
+            socket.emit('fileSystemChanged');
         });
     });
 

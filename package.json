@@ -25,6 +25,8 @@
     "golden-layout": "^1.5.9",
     "jstree": "^3.3.4",
     "nw": "^0.24.4",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
     "three": "^0.86.0"
   }
 }
