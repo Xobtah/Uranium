@@ -24,9 +24,6 @@ let Editor = function () {
 		enteredVR: new Signal(),
 		exitedVR: new Signal(),
 
-		// actions
-		//showModal: new Signal(),
-
 		// notifications
 		editorCleared: new Signal(),
 
@@ -101,6 +98,20 @@ let Editor = function () {
 Editor.prototype = {
 
 	setTheme: function (value) {
+        let jstreeDiv = $("#jstree");
+
+        switch (value) {
+            case 'css/light.css':
+                document.getElementById('GLtheme').href = '../node_modules/golden-layout/src/css/goldenlayout-light-theme.css';
+                if (jstreeDiv) jstreeDiv.jstree('set_theme', 'default');
+                break;
+            case 'css/dark.css':
+                document.getElementById('GLtheme').href = '../node_modules/golden-layout/src/css/goldenlayout-dark-theme.css';
+                if (jstreeDiv) jstreeDiv.jstree('set_theme', 'default-dark');
+                break;
+            default:
+                break;
+        }
 		document.getElementById('theme').href = value;
 		this.signals.themeChanged.dispatch(value);
 	},

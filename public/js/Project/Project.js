@@ -18,7 +18,7 @@ let Project = function (editor, container) {
             break;
     }
 
-    $(document).ready(() => {
+    $(container.getElement()).ready(() => {
         jstreeDiv = $('#jstree');
 
         jstreeDiv.jstree({
@@ -38,6 +38,7 @@ let Project = function (editor, container) {
                 },
                 check_callback: true // For Create from contextmenu to work
             },
+            contextmenu: { items: Project.ContextMenu },
             plugins: [ 'contextmenu', 'dnd' ]
         });
 
@@ -61,8 +62,13 @@ let Project = function (editor, container) {
             let start = performance.now();
             let oldPath = data.node.id;
             let newPath = data.node.parent + '/' + data.text;
+            let nodeType = jstreeDiv.jstree(true).get_icon(data.node) === 'jstree-file' ? 'file' : 'folder';
 
-            if (oldPath === data.node.parent + '/' + data.old)
+            if (oldPath.substr(oldPath.lastIndexOf('/') + 1, oldPath.length) === 'New node' ||
+                oldPath !== data.node.parent + '/' + data.old)
+                $.post('/api/assets', { path: newPath, type: nodeType }, () =>
+                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' created. ' + (performance.now() - start).toFixed(2) + 'ms'));
+            else
                 $.ajax({
                     url: '/api/assets', type: 'PUT',
                     data: { path: oldPath, new: newPath },
@@ -70,27 +76,20 @@ let Project = function (editor, container) {
                         console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' renamed. ' + (performance.now() - start).toFixed(2) + 'ms');
                     }
                 });
-            else
-                $.post('/api/assets', { path: newPath }, () =>
-                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' created. ' + (performance.now() - start).toFixed(2) + 'ms'));
             jstreeDiv.jstree(true).set_id(data.node, newPath);
-            socket.emit('fileSystemChanged');
         });
 
         // Delete node
         jstreeDiv.bind('delete_node.jstree', (e, data) => {
             let start = performance.now();
 
-            if (!data.node.children.length || confirm('Do you want to delete ' + data.node.text + '?')) {
-                $.ajax({
-                    url: '/api/assets', type: 'DELETE',
-                    data: { path: data.node.id },
-                    success: function (result) {
-                        console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' deleted. ' + (performance.now() - start).toFixed(2) + 'ms');
-                    }
-                });
-                socket.emit('fileSystemChanged');
-            }
+            $.ajax({
+                url: '/api/assets', type: 'DELETE',
+                data: { path: data.node.id },
+                success: function (result) {
+                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.node.text + ' deleted. ' + (performance.now() - start).toFixed(2) + 'ms');
+                }
+            });
         });
 
         // Move node
@@ -107,7 +106,6 @@ let Project = function (editor, container) {
                 }
             });
             jstreeDiv.jstree(true).set_id(data.node, newPath);
-            socket.emit('fileSystemChanged');
         });
     });
 

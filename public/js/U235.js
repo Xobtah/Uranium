@@ -3,7 +3,6 @@ window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.Mo
 
 Number.prototype.format = function () { return (this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")); };
 
-//let { ipcRenderer } = require('electron');
 let config = {
     content: [ {
         type: 'row',
@@ -37,29 +36,10 @@ let config = {
 let layout = new GoldenLayout(config);
 let editor = new Editor();
 let menubar = new Menubar(editor);
-//let modal = new UI.Modal(editor);
 
 document.body.append(menubar.dom);
 
 editor.setTheme(editor.config.getKey('theme'));
-function setApplicationTheme(value) {
-    let jstreeDiv = $("#jstree");
-
-    switch (value) {
-        case 'css/light.css':
-            document.getElementById('GLtheme').href = '../node_modules/golden-layout/src/css/goldenlayout-light-theme.css';
-            if (jstreeDiv) jstreeDiv.jstree('set_theme', 'default');
-            break;
-        case 'css/dark.css':
-            document.getElementById('GLtheme').href = '../node_modules/golden-layout/src/css/goldenlayout-dark-theme.css';
-            if (jstreeDiv) jstreeDiv.jstree('set_theme', 'default-dark');
-            break;
-        default:
-            break;
-    }
-}
-setApplicationTheme(editor.config.getKey('theme'));
-editor.signals.themeChanged.add(setApplicationTheme);
 
 editor.storage.init(() => {
     editor.storage.get((state) => {
@@ -101,7 +81,6 @@ editor.storage.init(() => {
     signals.sceneGraphChanged.add(saveState);
     signals.scriptChanged.add(saveState);
     signals.historyChanged.add(saveState);
-    //signals.showModal.add((content) => modal.show(content));
 });
 
 //
@@ -227,11 +206,5 @@ layout.registerComponent('Project', function (container, componentState) {
     container.getElement().html('<div id="jstree" style="background: initial"></div>');
     new Project(editor, container);
 });
-
-/*ipcRenderer.on('openComponent', (event, arg) => {
-    if ([ 'Scene', 'Game', 'Sidebar', 'Script' ].indexOf(arg) < 0)
-        return ;
-    layout.root.contentItems[0].addChild({ type: 'component', componentName: arg, componentState: {  } }, 0);
-});*/
 
 layout.init();

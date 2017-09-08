@@ -10,6 +10,7 @@ let Menubar = function (editor) {
 	container.add(new Menubar.Edit(editor));
 	container.add(new Menubar.Add(editor));
 	container.add(new Menubar.Play(editor));
+	container.add(new Menubar.Window(editor));
 	//container.add(new Menubar.View(editor));
 	//container.add(new Menubar.Examples(editor));
 	//container.add(new Menubar.Help(editor));

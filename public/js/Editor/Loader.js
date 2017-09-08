@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var Loader = function (editor) {
+let Loader = function (editor) {
 	var scope = this;
 	var signals = editor.signals;
 
@@ -205,12 +205,14 @@ var Loader = function (editor) {
 				break;
 			case 'obj':
 				reader.addEventListener('load', function (event) {
-					var contents = event.target.result;
+					let contents = event.target.result;
 
-					var object = new THREE.OBJLoader().parse(contents);
+					let object = new THREE.OBJLoader().parse(contents);
 					object.name = filename;
 
-					editor.execute(new AddObjectCommand(object));
+					$.post('/api/assets', { path: 'Test/Assets/' + filename, data: contents }, () => {
+                        editor.execute(new AddObjectCommand(object));
+					});
 				}, false);
 				reader.readAsText(file);
 				break;

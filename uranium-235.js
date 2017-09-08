@@ -11,15 +11,33 @@ let path = require('path');
 app.use(express.static(__dirname + '/public'));
 app.use('/node_modules/', express.static(__dirname + '/node_modules/'));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+/*app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());*/
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.post('/api/assets', (req, res) => {
     let fileContent = req.body.data ? JSON.stringify(req.body.data) : '';
 
-    fs.writeFile(path.join(__dirname, 'U235 Projects', req.body.path), fileContent, (err) => {
-        return (err ? res.status(500).send(err) : res.sendStatus(200));
-    });
+    if (req.body.type === 'folder')
+        fs.mkdir(path.join(__dirname, 'U235 Projects', req.body.path), (err) => {
+            if (err) {
+                console.log(err);
+                return (res.status(500).send(err));
+            }
+            res.sendStatus(200);
+            io.sockets.emit('fileSystemChanged');
+        });
+
+    else
+        fs.writeFile(path.join(__dirname, 'U235 Projects', req.body.path), fileContent, (err) => {
+            if (err) {
+                console.log(err);
+                return (res.status(500).send(err));
+            }
+            res.sendStatus(200);
+            io.sockets.emit('fileSystemChanged');
+        });
 });
 
 app.put('/api/assets', (req, res) => {
@@ -31,6 +49,7 @@ app.put('/api/assets', (req, res) => {
                     return (res.status(500).send(err));
                 }
                 res.sendStatus(200);
+                io.sockets.emit('fileSystemChanged');
         });
 });
 
@@ -41,6 +60,7 @@ app.delete('/api/assets', (req, res) => {
             return (res.status(500).send(err));
         }
         res.sendStatus(200);
+        io.sockets.emit('fileSystemChanged');
     });
 });
 
@@ -72,15 +92,19 @@ app.get('/api/assets', (req, res) => {
 
                 files.forEach((file) => {
                     let hasChildren = false;
+                    let nodeIcon = 'jstree-file';
 
-                    if (fs.statSync(__dirname + '/U235 Projects/' + req.query.path + '/' + file).isDirectory() &&
-                        fs.readdirSync(__dirname + '/U235 Projects/' + req.query.path + '/' + file).length)
-                        hasChildren = true;
+                    if (fs.statSync(__dirname + '/U235 Projects/' + req.query.path + '/' + file).isDirectory()) {
+                        nodeIcon = 'jstree-folder';
+                        if (fs.readdirSync(__dirname + '/U235 Projects/' + req.query.path + '/' + file).length)
+                            hasChildren = true;
+                    }
 
                     dirContent.push({
                         text: file,
                         id: req.query.path + '/' + file,
-                        children: hasChildren
+                        children: hasChildren,
+                        icon: nodeIcon
                     });
                 });
 
@@ -98,7 +122,7 @@ let io = require('socket.io').listen(server);
 io.on('connection', (client) => {
     console.log('Client connection.');
 
-    client.on('fileSystemChanged', () => client.broadcast.emit('fileSystemChanged'));
+    //client.on('fileSystemChanged', () => client.broadcast.emit('fileSystemChanged'));
 
     client.on('disconnect', () => {});
 });
