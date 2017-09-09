@@ -6,6 +6,5 @@ Visit http://uranium-235.com for a live demo.
 ### TODO
  - Physics Engine
  - Better signals gestion
- - Better websocket gestion
- - Ability to create files AND folders in the project view
  - Better game visualization (Ctrl+P -> Shows Game tab)
+ - Adding remote nodes one by one instead of using .refresh()
