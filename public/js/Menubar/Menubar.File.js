@@ -62,10 +62,25 @@ Menubar.File = function (editor) {
 
 	// Import
 
-	var fileInput = document.createElement('input');
+	let fileInput = document.createElement('input');
 	fileInput.type = 'file';
 	fileInput.addEventListener('change', (event) => {
-		editor.loader.loadFile(fileInput.files[0]);
+        let start = performance.now();
+        let formData = new FormData();
+
+        formData.append('Test/Assets/' + fileInput.files[0].name, fileInput.files[0]);
+        $.ajax({
+            url: '/api/assets',
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + fileInput.files[0].text + ' uploaded. ' + (performance.now() - start).toFixed(2) + 'ms');
+                editor.loader.loadFile(fileInput.files[0]);
+            }
+        });
 	});
 
 	var option = new UI.Row();

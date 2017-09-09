@@ -11,33 +11,32 @@ let path = require('path');
 app.use(express.static(__dirname + '/public'));
 app.use('/node_modules/', express.static(__dirname + '/node_modules/'));
 
-/*app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());*/
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+app.use(require('express-fileupload')());
 
 app.post('/api/assets', (req, res) => {
     let fileContent = req.body.data ? JSON.stringify(req.body.data) : '';
 
-    if (req.body.type === 'folder')
-        fs.mkdir(path.join(__dirname, 'U235 Projects', req.body.path), (err) => {
-            if (err) {
-                console.log(err);
-                return (res.status(500).send(err));
-            }
-            res.sendStatus(200);
-            io.sockets.emit('fileSystemChanged');
-        });
+    let isoke = function (err) {
+        if (err) {
+            console.log(err);
+            return (res.status(500).send(err));
+        }
+        res.sendStatus(200);
+        io.sockets.emit('fileSystemChanged');
+    };
 
+    if (req.files) {
+        let fileKey = Object.keys(req.files)[0];
+        let file = req.files[fileKey];
+        file.mv(path.join(__dirname, 'U235 Projects', fileKey), isoke);
+    }
+    else if (req.body.type === 'folder')
+        fs.mkdir(path.join(__dirname, 'U235 Projects', req.body.path), isoke);
     else
-        fs.writeFile(path.join(__dirname, 'U235 Projects', req.body.path), fileContent, (err) => {
-            if (err) {
-                console.log(err);
-                return (res.status(500).send(err));
-            }
-            res.sendStatus(200);
-            io.sockets.emit('fileSystemChanged');
-        });
+        fs.writeFile(path.join(__dirname, 'U235 Projects', req.body.path), fileContent, isoke);
 });
 
 app.put('/api/assets', (req, res) => {
@@ -72,14 +71,7 @@ app.get('/api/assets', (req, res) => {
         }
 
         if (stats.isFile())
-            fs.readFile(__dirname + '/U235 Projects/' + req.query.path, (err, data) => {
-                if (err) {
-                    console.log(err);
-                    return (res.status(500).send(err));
-                }
-                res.setHeader('Content-Type', 'application/json');
-                res.send(JSON.parse(data));
-            });
+            res.sendFile(path.join(__dirname, '/U235 Projects/', req.query.path));
 
         else if (stats.isDirectory())
             fs.readdir(__dirname + '/U235 Projects/' + req.query.path, (err, files) => {

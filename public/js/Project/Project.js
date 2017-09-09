@@ -36,7 +36,7 @@ let Project = function (editor, container) {
                         return ({ path: node.id === '#' ? 'Test' : node.id });
                     }
                 },
-                check_callback: true // For Create from contextmenu to work
+                check_callback: true // For contextmenu to work
             },
             contextmenu: { items: Project.ContextMenu },
             plugins: [ 'contextmenu', 'dnd' ]
@@ -47,13 +47,30 @@ let Project = function (editor, container) {
 
         // Double click on node
         jstreeDiv.bind('dblclick.jstree', function (event) {
-            let node = $(event.target).closest('li');
+            let node = $(event.target).closest('li')[0];
+            let nodeName = jstreeDiv.jstree(true).get_text(node.id);
 
-            $.get('/api/assets', { path: node[0].id }, (data, err) => {
+            $.get('/api/assets', { path: node.id }, (data) => {
+                if (typeof data !== 'object') {
+                    if (nodeName.substr(nodeName.lastIndexOf('.') + 1, nodeName.length) === 'json')
+                        data = JSON.parse(data);
+                    else
+                        data = new File([ data ], nodeName);
+                }
+
                 if (data.metadata && data.metadata.type === 'Scene') {
                     editor.clear();
                     editor.fromJSON(data);
                 }
+                else if (!Array.isArray(data))
+                    editor.loader.loadFile(data);
+                    /*switch (nodeName.substr(nodeName.lastIndexOf('.') + 1, nodeName.length)) {
+                        case 'obj':
+                            editor.loader.loadFile(file);
+                            break;
+                        default:
+                            break;
+                    }*/
             });
         });
 

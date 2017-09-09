@@ -7,6 +7,16 @@ Project.ContextMenu = function (node) {
 
     let items = {
 
+        openItem: {
+            label: 'Open',
+            action: function (node) {
+                if (tree.get_icon(node) === 'jstree-folder')
+                    tree.open_node(node);
+                else if (tree.get_icon(node) === 'jstree-file')
+                    editor.execute(new AddObjectCommand(object));
+            }
+        },
+
         createItem: {
             separator_before: false,
             separator_after: true,
