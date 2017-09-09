@@ -1,7 +1,7 @@
 # Uranium 235
 Game Engine based ThreeJS's editor and the web technologies.
 
-Visit http://uranium-235.com for a live demo.
+Try the [live demo!](http://uranium-235.com)
 
 ### TODO
  - Physics Engine
