@@ -6,6 +6,5 @@ Try the [live demo](http://uranium-235.com)!
 ### TODO
  - Physics Engine
  - Better signals gestion
- - Better game visualization (Ctrl+P -> Shows Game tab)
  - When receiving signal to move node into unloaded folder, the node doesn't move
  - Embed project into Electron & NW

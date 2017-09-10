@@ -12,19 +12,23 @@ Menubar.Play = function (editor) {
 
 	let title = new UI.Panel();
 	title.setClass('title');
+	title.setId('playStopButton');
 	title.setTextContent('Play');
+
+	signals.startPlayer.add(() => title.setTextContent('Stop'));
+	signals.stopPlayer.add(() => title.setTextContent('Play'));
+
 	title.onClick(function () {
 		if (isPlaying === false) {
 			isPlaying = true;
-			title.setTextContent('Stop');
 			signals.startPlayer.dispatch();
 		}
 		else {
 			isPlaying = false;
-			title.setTextContent('Play');
 			signals.stopPlayer.dispatch();
 		}
 	} );
+
 	container.add(title);
 
 	return (container);

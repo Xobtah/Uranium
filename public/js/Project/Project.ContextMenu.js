@@ -9,11 +9,26 @@ Project.ContextMenu = function (node) {
 
         openItem: {
             label: 'Open',
-            action: function (node) {
+            action: function () {
                 if (tree.get_icon(node) === 'jstree-folder')
                     tree.open_node(node);
                 else if (tree.get_icon(node) === 'jstree-file')
-                    editor.execute(new AddObjectCommand(object));
+                    $.get('/api/assets', { path: node.id }, (data) => {
+                        if (typeof data !== 'object') {
+                            if (node.text.substr(node.text.lastIndexOf('.') + 1, node.text.length) === 'json')
+                                data = JSON.parse(data);
+                            else
+                                data = new File([ data ], node.text);
+                        }
+
+                        if (data.metadata && data.metadata.type === 'Scene') {
+                            editor.clear();
+                            editor.fromJSON(data);
+                            editor.scene.name = node.text.substr(0, node.text.indexOf('.'));
+                        }
+                        else if (!Array.isArray(data))
+                            editor.loader.loadFile(data);
+                    });
             }
         },
 
@@ -27,43 +42,24 @@ Project.ContextMenu = function (node) {
                     label: 'File',
                     icon: 'jstree-file',
                     action: function () {
-                        /*let parent = node;
-                        let notif = new console.notification();
-                        let formData = new FormData();*/
-
                         node = tree.create_node(node, {
                             text: 'New node',
                             id: node.id + '/New node',
                             icon: 'jstree-file'
                         });
                         tree.edit(node);
-                        /*formData.append(parent.id + '/' + tree.get_text(node), new File([ '.' ], tree.get_text(node)));
-                        $.ajax({
-                            url: '/api/assets', type: 'POST',
-                            data: formData,
-                            cache: false, contentType: false, processData: false,
-                            success: function (result) {
-                                notif.exec('File ' + tree.get_text(node) + ' created.');
-                            }
-                        });*/
                     }
                 },
                 folderItem: {
                     label: 'Folder',
                     icon: 'jstree-folder',
                     action: function () {
-                        /*let notif = new console.notification();
-                        let parent = node;*/
-
                         node = tree.create_node(node, {
                             text: 'New node',
                             id: node.id + '/New node',
                             icon: 'jstree-folder'
                         });
                         tree.edit(node);
-                        /*$.post('/api/assets/dir', { path: parent.id + '/' + tree.get_text(node) }, () => {
-                            notif.exec('Directory ' + tree.get_text(node) + ' created.');
-                        });*/
                     }
                 }
             }

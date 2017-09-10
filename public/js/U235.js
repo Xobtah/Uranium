@@ -112,10 +112,11 @@ document.addEventListener('keydown', (event) => {
             //event.preventDefault(); // prevent browser back
         case 46: // delete
             let object = editor.selected;
-            if (confirm('Delete ' + object.name + '?') === false)
-                return ;
-            let parent = object.parent;
-            if (parent !== null) editor.execute(new RemoveObjectCommand(object));
+            if (object && confirm('Delete ' + object.name + '?')) {
+                let parent = object.parent;
+                if (parent !== null)
+                    editor.execute(new RemoveObjectCommand(object));
+            }
             break;
         case 90: // Register Ctrl-Z for Undo, Ctrl-Shift-Z for Redo
             if (event.ctrlKey && event.shiftKey)
@@ -132,6 +133,16 @@ document.addEventListener('keydown', (event) => {
         case 82: // Register R for scaling transform mode
             editor.signals.transformModeChanged.dispatch('scale');
             break;*/
+        case 80: // Register Ctrl+P for Play/Pause
+            if (event.ctrlKey) {
+                event.preventDefault();
+                let playStopDiv = $('#playStopButton');
+                if (playStopDiv.text() === 'Play')
+                    editor.signals.startPlayer.dispatch();
+                else if (playStopDiv.text() === 'Stop')
+                    editor.signals.stopPlayer.dispatch();
+            }
+            break;
     }
 }, false);
 
