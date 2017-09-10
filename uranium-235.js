@@ -53,7 +53,15 @@ app.put('/api/assets', (req, res) => {
                     return (res.status(500).send(err));
                 }
                 res.sendStatus(200);
-                io.sockets.emit('fileSystem', { type: 'PUT', path: req.body.path, new: req.body.new });
+                fs.stat(__dirname + '/U235 Projects/' + req.body.new, (err, stats) => {
+                    if (err) {
+                        console.log(err);
+                        return (res.status(500).send(err));
+                    }
+                    io.sockets.emit('fileSystem', {
+                        type: 'PUT', path: req.body.path, new: req.body.new, isDir: stats.isDirectory()
+                    });
+                });
         });
 });
 

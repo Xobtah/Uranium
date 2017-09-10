@@ -24,7 +24,7 @@ let config = {
                 componentState: {  },
                 width: 15
             }, {
-                type: 'stack',
+                type: 'column',
                 content: [ {
                     type: 'component',
                     componentName: 'Scene',

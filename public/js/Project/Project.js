@@ -48,29 +48,39 @@ let Project = function (editor, container) {
 
                 case 'POST':
                     if (!jstreeDiv.jstree(true).get_node(data.path)) {
-                        jstreeDiv.jstree(true).create_node(data.path.substr(0, data.path.lastIndexOf('/')), {
-                            text: data.path.substr(data.path.lastIndexOf('/') + 1, data.path.length),
-                            id: data.path,
-                            icon: data.isDir ? 'jstree-folder' : 'jstree-file'
+                        let parent = data.path.substr(0, data.path.lastIndexOf('/'));
+                        let name = data.new.substr(data.new.lastIndexOf('/') + 1, data.new.length);
+
+                        jstreeDiv.jstree(true).create_node(parent, {
+                            text: name, id: data.path, icon: data.isDir ? 'jstree-folder' : 'jstree-file'
                         });
                     }
                     break;
 
                 case 'PUT':
-                    if (jstreeDiv.jstree(true).get_node(data.path)) {
-                        let newParent = data.new.substr(0, data.new.lastIndexOf('/'));
-                        let newName = data.new.substr(data.new.lastIndexOf('/') + 1, data.new.length);
+                    let oldParent = data.path.substr(0, data.path.lastIndexOf('/'));
+                    let newParent = data.new.substr(0, data.new.lastIndexOf('/'));
+                    let newName = data.new.substr(data.new.lastIndexOf('/') + 1, data.new.length);
 
-                        jstreeDiv.unbind('move_node.jstree');
-                        jstreeDiv.jstree(true).move_node(data.path, newParent);
-                        jstreeDiv.bind('move_node.jstree', moveNode);
-
-                        jstreeDiv.unbind('rename_node.jstree');
-                        jstreeDiv.jstree(true).rename_node(data.path, newName);
-                        jstreeDiv.bind('rename_node.jstree', renameNode);
-
-                        jstreeDiv.jstree(true).set_id(data.path, data.new);
+                    if (jstreeDiv.jstree(true).is_open(newParent)) {
+                        if (jstreeDiv.jstree(true).is_open(oldParent)) {
+                            jstreeDiv.unbind('move_node.jstree');
+                            jstreeDiv.jstree(true).move_node(data.path, newParent);
+                            jstreeDiv.bind('move_node.jstree', moveNode);
+                        }
+                        else
+                            jstreeDiv.jstree(true).create_node(newParent, {
+                                text: newName, id: data.path, icon: data.isDir ? 'jstree-folder' : 'jstree-file'
+                            });
                     }
+                    else
+                        jstreeDiv.jstree(true).delete_node(data.path);
+
+                    jstreeDiv.unbind('rename_node.jstree');
+                    jstreeDiv.jstree(true).rename_node(data.path, newName);
+                    jstreeDiv.bind('rename_node.jstree', renameNode);
+
+                    jstreeDiv.jstree(true).set_id(data.path, data.new);
                     break;
 
                 case 'DELETE':
