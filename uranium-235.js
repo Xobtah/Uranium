@@ -17,26 +17,31 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(require('express-fileupload')());
 
 app.post('/api/assets', (req, res) => {
-    let fileContent = req.body.data ? JSON.stringify(req.body.data) : '';
-
-    let isoke = function (err) {
-        if (err) {
-            console.log(err);
-            return (res.status(500).send(err));
-        }
-        res.sendStatus(200);
-        io.sockets.emit('fileSystemChanged');
-    };
-
-    if (req.files) {
+    if (Object.keys(req.files).length) {
         let fileKey = Object.keys(req.files)[0];
         let file = req.files[fileKey];
-        file.mv(path.join(__dirname, 'U235 Projects', fileKey), isoke);
+
+        file.mv(path.join(__dirname, 'U235 Projects', fileKey), (err) => {
+            if (err) {
+                console.log(err);
+                return (res.status(500).send(err));
+            }
+            res.sendStatus(200);
+            io.sockets.emit('fileSystem', { type: 'POST', path: fileKey, isDir: false });
+        });
     }
-    else if (req.body.type === 'folder')
-        fs.mkdir(path.join(__dirname, 'U235 Projects', req.body.path), isoke);
-    else
-        fs.writeFile(path.join(__dirname, 'U235 Projects', req.body.path), fileContent, isoke);
+});
+
+app.post('/api/assets/dir', (req, res) => {
+    if (req.body.path)
+        fs.mkdir(path.join(__dirname, 'U235 Projects', req.body.path), (err) => {
+            if (err) {
+                console.log(err);
+                return (res.status(500).send(err));
+            }
+            res.sendStatus(200);
+            io.sockets.emit('fileSystem', { type: 'POST', path: req.body.path, isDir: true });
+        });
 });
 
 app.put('/api/assets', (req, res) => {
@@ -48,64 +53,66 @@ app.put('/api/assets', (req, res) => {
                     return (res.status(500).send(err));
                 }
                 res.sendStatus(200);
-                io.sockets.emit('fileSystemChanged');
+                io.sockets.emit('fileSystem', { type: 'PUT', path: req.body.path, new: req.body.new });
         });
 });
 
 app.delete('/api/assets', (req, res) => {
-    fs.remove(path.join(__dirname, 'U235 Projects', req.body.path), (err) => {
-        if (err) {
-            console.log(err);
-            return (res.status(500).send(err));
-        }
-        res.sendStatus(200);
-        io.sockets.emit('fileSystemChanged');
-    });
+    if (req.body.path)
+        fs.remove(path.join(__dirname, 'U235 Projects', req.body.path), (err) => {
+            if (err) {
+                console.log(err);
+                return (res.status(500).send(err));
+            }
+            res.sendStatus(200);
+            io.sockets.emit('fileSystem', { type: 'DELETE', path: req.body.path });
+        });
 });
 
 app.get('/api/assets', (req, res) => {
-    fs.stat(__dirname + '/U235 Projects/' + req.query.path, (err, stats) => {
-        if (err) {
-            console.log(err);
-            return (res.status(500).send(err));
-        }
+    if (req.query.path)
+        fs.stat(__dirname + '/U235 Projects/' + req.query.path, (err, stats) => {
+            if (err) {
+                console.log(err);
+                return (res.status(500).send(err));
+            }
 
-        if (stats.isFile())
-            res.sendFile(path.join(__dirname, '/U235 Projects/', req.query.path));
+            if (stats.isFile())
+                res.sendFile(path.join(__dirname, '/U235 Projects/', req.query.path));
 
-        else if (stats.isDirectory())
-            fs.readdir(__dirname + '/U235 Projects/' + req.query.path, (err, files) => {
-                let dirContent = [];
+            else if (stats.isDirectory())
+                fs.readdir(__dirname + '/U235 Projects/' + req.query.path, (err, files) => {
+                    let dirContent = [];
 
-                if (err) {
-                    console.log(err);
-                    return (res.status(500).send(err));
-                }
-
-                files.forEach((file) => {
-                    let hasChildren = false;
-                    let nodeIcon = 'jstree-file';
-
-                    if (fs.statSync(__dirname + '/U235 Projects/' + req.query.path + '/' + file).isDirectory()) {
-                        nodeIcon = 'jstree-folder';
-                        if (fs.readdirSync(__dirname + '/U235 Projects/' + req.query.path + '/' + file).length)
-                            hasChildren = true;
+                    if (err) {
+                        console.log(err);
+                        return (res.status(500).send(err));
                     }
 
-                    dirContent.push({
-                        text: file,
-                        id: req.query.path + '/' + file,
-                        children: hasChildren,
-                        icon: nodeIcon
+                    files.forEach((file) => {
+                        let hasChildren = false;
+                        let nodeIcon = 'jstree-file';
+
+                        if (fs.statSync(__dirname + '/U235 Projects/' + req.query.path + '/' + file).isDirectory()) {
+                            nodeIcon = 'jstree-folder';
+                            if (fs.readdirSync(__dirname + '/U235 Projects/' + req.query.path + '/' + file).length)
+                                hasChildren = true;
+                        }
+
+                        dirContent.push({
+                            text: file,
+                            id: req.query.path + '/' + file,
+                            children: hasChildren,
+                            icon: nodeIcon
+                        });
                     });
+
+                    if (dirContent.length === 1)
+                        dirContent[0].state = { opened: true };
+
+                    res.send(dirContent);
                 });
-
-                if (dirContent.length === 1)
-                    dirContent[0].state = { opened: true };
-
-                res.send(dirContent);
-            });
-    });
+        });
 });
 
 let server = app.listen(80);
@@ -113,8 +120,6 @@ let io = require('socket.io').listen(server);
 
 io.on('connection', (client) => {
     console.log('Client connection.');
-
-    //client.on('fileSystemChanged', () => client.broadcast.emit('fileSystemChanged'));
 
     client.on('disconnect', () => {});
 });

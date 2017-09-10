@@ -9,36 +9,31 @@ let Player = function (editor, container) {
     container.dom = container.getElement()[0];
     container.dom.className = 'Panel';
     container.dom.id = 'player';
-	container.dom.style.display = 'none';
 
-	//
+    //
 
-	let player = new APP.Player(editor, container);
-	container.dom.appendChild(player.dom);
+    let player = new APP.Player(editor, container);
+    container.dom.appendChild(player.dom);
 
-	//
+    //
 
-	signals.startPlayer.add(() => eventHub.emit('startPlayer'));
-	signals.stopPlayer.add(() => eventHub.emit('stopPlayer'));
+    signals.startPlayer.add(() => eventHub.emit('startPlayer'));
+    signals.stopPlayer.add(() => eventHub.emit('stopPlayer'));
 
-	container.on('resize', () => {
+    container.on('resize', () => {
         player.setSize(container.dom.clientWidth, container.dom.clientHeight);
-	});
+    });
 
-	eventHub.on('startPlayer', () => {
-        container.dom.style.display = '';
-
+    eventHub.on('startPlayer', () => {
         player.load(editor.toJSON());
         player.setSize(container.dom.clientWidth, container.dom.clientHeight);
         player.play();
-	});
+    });
 
     eventHub.on('stopPlayer', () => {
-		container.dom.style.display = 'none';
+        player.stop();
+        player.dispose();
+    });
 
-		player.stop();
-		player.dispose();
-	});
-
-	return (container);
+    return (container);
 };

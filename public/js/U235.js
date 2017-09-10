@@ -3,6 +3,16 @@ window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.Mo
 
 Number.prototype.format = function () { return (this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")); };
 
+console.notification = function (initMessage) {
+    let start = performance.now();
+
+    return ({
+        exec: function (execMessage) {
+            console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', execMessage || initMessage || '' + ' ' + (performance.now() - start).toFixed(2) + 'ms');
+        }
+    });
+};
+
 let config = {
     content: [ {
         type: 'row',

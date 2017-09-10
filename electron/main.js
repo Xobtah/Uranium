@@ -38,3 +38,5 @@ app.on('activate', function () {
 	if (!mainWindow)
 		createWindow();
 });
+
+require('./../uranium-235');

@@ -42,11 +42,49 @@ let Project = function (editor, container) {
             plugins: [ 'contextmenu', 'dnd' ]
         });
 
-        // FileSystemChanged signal
-        editor.signals.fileSystemChanged.add(() => jstreeDiv.jstree(true).refresh());
+        // Websocket's fileSystem signal
+        socket.on('fileSystem', (data) => {
+            switch (data.type) {
+
+                case 'POST':
+                    if (!jstreeDiv.jstree(true).get_node(data.path)) {
+                        jstreeDiv.jstree(true).create_node(data.path.substr(0, data.path.lastIndexOf('/')), {
+                            text: data.path.substr(data.path.lastIndexOf('/') + 1, data.path.length),
+                            id: data.path,
+                            icon: data.isDir ? 'jstree-folder' : 'jstree-file'
+                        });
+                    }
+                    break;
+
+                case 'PUT':
+                    if (jstreeDiv.jstree(true).get_node(data.path)) {
+                        let newParent = data.new.substr(0, data.new.lastIndexOf('/'));
+                        let newName = data.new.substr(data.new.lastIndexOf('/') + 1, data.new.length);
+
+                        jstreeDiv.unbind('move_node.jstree');
+                        jstreeDiv.jstree(true).move_node(data.path, newParent);
+                        jstreeDiv.bind('move_node.jstree', moveNode);
+
+                        jstreeDiv.unbind('rename_node.jstree');
+                        jstreeDiv.jstree(true).rename_node(data.path, newName);
+                        jstreeDiv.bind('rename_node.jstree', renameNode);
+
+                        jstreeDiv.jstree(true).set_id(data.path, data.new);
+                    }
+                    break;
+
+                case 'DELETE':
+                    if (jstreeDiv.jstree(true).get_node(data.path))
+                        jstreeDiv.jstree(true).delete_node(data.path);
+                    break;
+
+                default:
+                    break;
+            }
+        });
 
         // Double click on node
-        jstreeDiv.bind('dblclick.jstree', function (event) {
+        function doubleClick(event) {
             let node = $(event.target).closest('li')[0];
             let nodeName = jstreeDiv.jstree(true).get_text(node.id);
 
@@ -61,69 +99,60 @@ let Project = function (editor, container) {
                 if (data.metadata && data.metadata.type === 'Scene') {
                     editor.clear();
                     editor.fromJSON(data);
+                    editor.scene.name = nodeName.substr(0, nodeName.indexOf('.'));
                 }
                 else if (!Array.isArray(data))
                     editor.loader.loadFile(data);
-                    /*switch (nodeName.substr(nodeName.lastIndexOf('.') + 1, nodeName.length)) {
-                        case 'obj':
-                            editor.loader.loadFile(file);
-                            break;
-                        default:
-                            break;
-                    }*/
             });
-        });
+        }
+        jstreeDiv.bind('dblclick.jstree', doubleClick);
 
         // Rename node
-        jstreeDiv.bind('rename_node.jstree', (e, data) => {
-            let start = performance.now();
+        function renameNode(e, data) {
+            let notif = new console.notification();
             let oldPath = data.node.id;
             let newPath = data.node.parent + '/' + data.text;
             let nodeType = jstreeDiv.jstree(true).get_icon(data.node) === 'jstree-file' ? 'file' : 'folder';
 
+            // If it's a new node
             if (oldPath.substr(oldPath.lastIndexOf('/') + 1, oldPath.length) === 'New node' ||
-                oldPath !== data.node.parent + '/' + data.old)
-                $.post('/api/assets', { path: newPath, type: nodeType }, () =>
-                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' created. ' + (performance.now() - start).toFixed(2) + 'ms'));
-            else
+                oldPath !== data.node.parent + '/' + data.old) {
+                if (nodeType === 'folder')
+                    $.post('/api/assets/dir', { path: newPath }, () => notif.exec('Directory ' + data.text + ' created.'));
+                else if (nodeType === 'file') {
+                    let formData = new FormData();
+
+                    formData.append(newPath, new File([ '.' ], data.text, { type: "text/plain", lastModified: new Date() }));
+                    $.ajax({
+                        url: '/api/assets', type: 'POST',
+                        data: formData,
+                        cache: false, contentType: false, processData: false,
+                        success: function (result) { notif.exec('File ' + data.text + ' created.'); }
+                    });
+                }
+            }
+            else // Else, it's a rename
                 $.ajax({
-                    url: '/api/assets', type: 'PUT',
-                    data: { path: oldPath, new: newPath },
-                    success: function (result) {
-                        console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' renamed. ' + (performance.now() - start).toFixed(2) + 'ms');
-                    }
+                    url: '/api/assets', type: 'PUT', data: { path: oldPath, new: newPath },
+                    success: function (result) { notif.exec('File ' + data.text + ' renamed.'); }
                 });
             jstreeDiv.jstree(true).set_id(data.node, newPath);
-        });
-
-        // Delete node
-        jstreeDiv.bind('delete_node.jstree', (e, data) => {
-            let start = performance.now();
-
-            $.ajax({
-                url: '/api/assets', type: 'DELETE',
-                data: { path: data.node.id },
-                success: function (result) {
-                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.node.text + ' deleted. ' + (performance.now() - start).toFixed(2) + 'ms');
-                }
-            });
-        });
+        }
+        jstreeDiv.bind('rename_node.jstree', renameNode);
 
         // Move node
-        jstreeDiv.bind('move_node.jstree', (e, data) => {
-            let start = performance.now();
+        function moveNode(e, data) {
+            let notif = new console.notification('File ' + data.text + ' moved. ');
             let oldPath = data.old_parent + '/' + data.node.text;
             let newPath = data.parent + '/' + data.node.text;
 
             $.ajax({
-                url: '/api/assets', type: 'PUT',
-                data: { path: oldPath, new: newPath },
-                success: function (result) {
-                    console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + data.text + ' moved. ' + (performance.now() - start).toFixed(2) + 'ms');
-                }
+                url: '/api/assets', type: 'PUT', data: { path: oldPath, new: newPath },
+                success: function (res) { notif.exec(); }
             });
             jstreeDiv.jstree(true).set_id(data.node, newPath);
-        });
+        }
+        jstreeDiv.bind('move_node.jstree', moveNode);
     });
 
     return (container);

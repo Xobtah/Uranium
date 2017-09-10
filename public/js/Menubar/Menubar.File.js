@@ -47,12 +47,16 @@ Menubar.File = function (editor) {
     option.setClass('option');
     option.setTextContent('Save Scene');
     option.onClick(() => {
-        let start = performance.now();
+        let formData = new FormData();
+        let notif = new console.notification('Scene ' + editor.scene.name + ' saved.');
 
-        $.post('/api/assets', { path: 'Test/Assets/' + editor.scene.name + '.json', data: JSON.stringify(editor.toJSON()) },
-			() => console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'Saved scene to application. ' + (performance.now() - start).toFixed(2) + 'ms'));
-        editor.signals.fileSystemChanged.dispatch();
-        socket.emit('fileSystemChanged');
+        formData.append('Test/Assets/' + editor.scene.name + '.json', new File([ JSON.stringify(editor.toJSON()) ], editor.scene.name + '.json'));
+        $.ajax({
+            url: '/api/assets', type: 'POST',
+            data: formData,
+            cache: false, contentType: false, processData: false,
+            success: function (res) { notif.exec(); }
+        });
     });
     options.add(option);
 
@@ -65,7 +69,7 @@ Menubar.File = function (editor) {
 	let fileInput = document.createElement('input');
 	fileInput.type = 'file';
 	fileInput.addEventListener('change', (event) => {
-        let start = performance.now();
+        let notif = new console.notification('File ' + fileInput.files[0].name + ' uploaded.');
         let formData = new FormData();
 
         formData.append('Test/Assets/' + fileInput.files[0].name, fileInput.files[0]);
@@ -77,7 +81,7 @@ Menubar.File = function (editor) {
             contentType: false,
             processData: false,
             success: function (res) {
-                console.log('[' + /\d\d\:\d\d\:\d\d/.exec(new Date())[0] + ']', 'File ' + fileInput.files[0].text + ' uploaded. ' + (performance.now() - start).toFixed(2) + 'ms');
+                notif.exec();
                 editor.loader.loadFile(fileInput.files[0]);
             }
         });

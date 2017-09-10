@@ -27,22 +27,43 @@ Project.ContextMenu = function (node) {
                     label: 'File',
                     icon: 'jstree-file',
                     action: function () {
-                        let parent = node;
-                        node = tree.create_node(node);
-                        tree.set_icon(node, 'jstree-file');
+                        /*let parent = node;
+                        let notif = new console.notification();
+                        let formData = new FormData();*/
+
+                        node = tree.create_node(node, {
+                            text: 'New node',
+                            id: node.id + '/New node',
+                            icon: 'jstree-file'
+                        });
                         tree.edit(node);
-                        tree.set_id(node, parent.id + '/' + tree.get_text(node));
+                        /*formData.append(parent.id + '/' + tree.get_text(node), new File([ '.' ], tree.get_text(node)));
+                        $.ajax({
+                            url: '/api/assets', type: 'POST',
+                            data: formData,
+                            cache: false, contentType: false, processData: false,
+                            success: function (result) {
+                                notif.exec('File ' + tree.get_text(node) + ' created.');
+                            }
+                        });*/
                     }
                 },
                 folderItem: {
                     label: 'Folder',
                     icon: 'jstree-folder',
                     action: function () {
-                        let parent = node;
-                        node = tree.create_node(node);
-                        tree.set_icon(node, 'jstree-folder');
+                        /*let notif = new console.notification();
+                        let parent = node;*/
+
+                        node = tree.create_node(node, {
+                            text: 'New node',
+                            id: node.id + '/New node',
+                            icon: 'jstree-folder'
+                        });
                         tree.edit(node);
-                        tree.set_id(node, parent.id + '/' + tree.get_text(node));
+                        /*$.post('/api/assets/dir', { path: parent.id + '/' + tree.get_text(node) }, () => {
+                            notif.exec('Directory ' + tree.get_text(node) + ' created.');
+                        });*/
                     }
                 }
             }
@@ -58,8 +79,16 @@ Project.ContextMenu = function (node) {
         deleteItem: {
             label: 'Delete',
             action: function () {
+                let notif = new console.notification('File ' + node.text + ' deleted.');
+
                 if (node.children.length === 0 || confirm('Do you want to delete ' + node.text + '?'))
-                    tree.delete_node(node);
+                    $.ajax({
+                        url: '/api/assets', type: 'DELETE', data: { path: node.id },
+                        success: function (result) {
+                            tree.delete_node(node);
+                            notif.exec();
+                        }
+                    });
             }
         },
 
@@ -93,7 +122,10 @@ Project.ContextMenu = function (node) {
             separator_before: true,
             label: 'Refresh',
             action: function () {
+                let notif = new console.notification('Tree refreshed.');
+
                 tree.refresh(node);
+                notif.exec();
             }
         }
 
