@@ -49,7 +49,7 @@ let Project = function (editor, container) {
                 case 'POST':
                     if (!jstreeDiv.jstree(true).get_node(data.path)) {
                         let parent = data.path.substr(0, data.path.lastIndexOf('/'));
-                        let name = data.new.substr(data.new.lastIndexOf('/') + 1, data.new.length);
+                        let name = data.path.substr(data.path.lastIndexOf('/') + 1, data.path.length);
 
                         jstreeDiv.jstree(true).create_node(parent, {
                             text: name, id: data.path, icon: data.isDir ? 'jstree-folder' : 'jstree-file'
