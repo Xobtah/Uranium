@@ -136,6 +136,8 @@ let APP = {
 
 		function animate(time) {
 			request = requestAnimationFrame(animate);
+			if (scene.simulate && typeof scene.simulate === 'function')
+				scene.simulate();
 
 			try {
 				dispatch(events.update, { time: time, delta: time - prevTime });

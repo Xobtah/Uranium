@@ -68,6 +68,13 @@ let Editor = function () {
 		historyChanged: new Signal()
 	};
 
+	// Physics config
+
+	Physijs.scripts.worker = '/js/libs/Physijs/physijs_worker.js';
+	Physijs.scripts.ammo = '/js/libs/Physijs/examples/js/ammo.js';
+
+	// Editor config
+
 	let name = 'Uranium 235';
 
 	this.config = new Config(name);
@@ -77,7 +84,8 @@ let Editor = function () {
 
 	this.camera = this.DEFAULT_CAMERA.clone();
 
-	this.scene = new THREE.Scene();
+	//this.scene = new THREE.Scene();
+	this.scene = new Physijs.Scene();
 	this.scene.name = 'Scene';
 	this.scene.background = new THREE.Color(0xaaaaaa);
 

@@ -39,7 +39,7 @@ let config = {
             type: 'component',
             componentName: 'Sidebar',
             componentState: {  },
-            width: 15
+            width: 20
         } ]
     } ]
 };
@@ -66,6 +66,7 @@ editor.storage.init(() => {
 
     let timeout;
 
+    // TODO: Make the rigidbodies to save
     function saveState(scene) {
         if (editor.config.getKey('autosave') === false)
             return ;
