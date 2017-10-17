@@ -106,7 +106,7 @@ let Project = function (editor, container) {
                         data = new File([ data ], nodeName);
                 }
 
-                if (data.metadata && data.metadata.type === 'Scene') {
+                if (data.metadata && data.metadata.type === editor.type) {
                     editor.clear();
                     editor.fromJSON(data);
                     editor.scene.name = nodeName.substr(0, nodeName.indexOf('.'));

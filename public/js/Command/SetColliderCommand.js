@@ -17,7 +17,10 @@ let SetColliderCommand = function (object, collider, index) {
 
 SetColliderCommand.prototype = {
 	execute: function () {
-        this.object.rigidbody.colliders[this.index] = this.collider;
+		if (!this.object.rigidbody.colliders[this.index])
+			this.object.rigidbody.colliders.push(this.collider);
+		else
+        	this.object.rigidbody.colliders[this.index] = this.collider;
 		this.editor.signals.objectChanged.dispatch(this.object);
 	},
 

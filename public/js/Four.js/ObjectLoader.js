@@ -131,8 +131,10 @@ THREE.ObjectLoader.prototype.parseObject = function () {
                 if (geometry.bones && geometry.bones.length > 0)
                     object = new THREE.SkinnedMesh(geometry, material);
                 else {
-                    if (rigidbody && rigidbody.colliders.length && rigidbody.colliders[0].type)
+                    if (rigidbody && rigidbody.colliders.length) {
                         object = new Physijs[rigidbody.colliders[0].type](geometry, material, rigidbody.mass);
+                        object.rigidbody = rigidbody;
+                    }
                     else
                         object = new THREE.Mesh(geometry, material);
                 }
@@ -225,7 +227,7 @@ THREE.ObjectLoader.prototype.parseRigidbodies = function (json) {
         json.forEach((rigidbody) => {
             if (!rigidbody.uuid) return ;
 
-            rigidbodies[rigidbody.uuid] = rigidbody;
+            rigidbodies[rigidbody.uuid] = new Rigidbody(rigidbody);
         });
     }
 

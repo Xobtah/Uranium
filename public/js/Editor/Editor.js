@@ -68,6 +68,8 @@ let Editor = function () {
 		historyChanged: new Signal()
 	};
 
+	this.type = 'Level';
+
 	// Physics config
 
 	Physijs.scripts.worker = '/js/libs/Physijs/physijs_worker.js';
@@ -343,8 +345,8 @@ Editor.prototype = {
 	//
 
 	fromJSON: function (json) {
-		if (json.metadata.type !== 'Scene')
-			throw new Error('JSON data is not a scene.');
+		if (json.metadata.type !== this.type)
+			throw new Error('JSON data is not an editor scene.');
 		let loader = new THREE.ObjectLoader();
 		// backwards
 		if (json.scene === undefined) {
@@ -357,6 +359,7 @@ Editor.prototype = {
 		this.camera.updateProjectionMatrix();
 		this.history.fromJSON(json.history);
 		this.scripts = json.scripts;
+		let test = loader.parse(json.scene);
 		this.setScene(loader.parse(json.scene));
 	},
 
@@ -371,7 +374,7 @@ Editor.prototype = {
 		}
 		//
 		return ({
-			metadata: { type: 'Scene' },
+			metadata: { type: this.type },
 			project: {
 				gammaInput: this.config.getKey('project/renderer/gammaInput'),
 				gammaOutput: this.config.getKey('project/renderer/gammaOutput'),

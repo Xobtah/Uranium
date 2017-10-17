@@ -5,19 +5,21 @@
 Sidebar.Physics = function (editor, object) {
 	let signals = editor.signals;
 
+	let meshTypes = {
+		'Mesh': 'Mesh',
+		'BoxMesh': 'Box Mesh',
+		'SphereMesh': 'Sphere Mesh',
+		'CylinderMesh': 'Cylinder Mesh',
+		'ConeMesh': 'Cone Mesh',
+		'CapsuleMesh': 'Capsule Mesh',
+		'ConvexMesh': 'Convex Mesh',
+		'ConcaveMesh': 'Concave Mesh',
+		'HeightfieldMesh': 'Heightfield Mesh'
+	};
+
 	let container = new UI.Panel();
 	container.setBorderTop('0');
 	container.setPaddingTop('20px');
-
-	// Rigidbody Activator
-
-	let rigidbodyRow = new UI.Row();
-	let objectRigidbody = new UI.Checkbox().onChange(update);
-
-	rigidbodyRow.add(new UI.Text('Rigidbody').setWidth('90px'));
-	rigidbodyRow.add(objectRigidbody);
-
-	container.add(rigidbodyRow);
 
 	// TODO: Fixing Serialization number & New / Copy / Paste
 	/*
@@ -73,8 +75,7 @@ Sidebar.Physics = function (editor, object) {
 	// Colliders container
 
 	let collidersContainer = new UI.Row();
-	collidersContainer.clear();
-	collidersContainer.setDisplay('none');
+
 	container.add(collidersContainer);
 
 	// Mass
@@ -83,24 +84,11 @@ Sidebar.Physics = function (editor, object) {
 
 	massContainer.add(new UI.Text('Mass').setWidth('90px'));
 	let objectMass = new UI.Number().setWidth('50px').onChange(function () {
-		editor.selected.rigidbody.mass = this.getValue();
+		editor.execute(new SetValueCommand(editor.selected.rigidbody, 'mass', this.getValue()));
 	});
 	massContainer.add(objectMass);
 
-	massContainer.setDisplay('none');
 	container.add(massContainer);
-
-	// New Collider TODO: Making new collider useful
-
-	let newColliderContainer = new UI.Button('New');
-	newColliderContainer.onClick(function () {
-		editor.execute(new AddColliderCommand(editor.selected, { type: null }));
-		refreshUI(editor.selected);
-		update();
-	});
-
-	newColliderContainer.setDisplay('none');
-	container.add(newColliderContainer);
 
 	// events
 
@@ -132,6 +120,31 @@ Sidebar.Physics = function (editor, object) {
 
 	// Update Functions
 
+	function refreshCollidersList(object) {
+		collidersContainer.clear();
+		if (object.rigidbody.colliders.length) {
+			for (let i = 0; i < object.rigidbody.colliders.length; i++) {
+				// TODO: Add position, rotation and scale to rigidbodies
+				collidersContainer.add(new UI.Text('Type').setWidth('90px'));
+				collidersContainer.add(new UI.Select().setOptions(meshTypes).onClick(function (event) {
+					event.stopPropagation(); // Avoid panel collapsing
+				}).onChange(function (event) {
+					editor.execute(new SetColliderCommand(object, { type: this.getValue() }, i));
+				}).setMarginTop('10px').setValue(object.rigidbody.colliders[i].type));
+				collidersContainer.add(new UI.Break());
+			}
+		}
+		collidersContainer.add(new UI.Text('Type').setWidth('90px'));
+		collidersContainer.add(new UI.Select().setOptions(meshTypes).onClick(function (event) {
+			event.stopPropagation(); // Avoid panel collapsing
+		}).onChange(function (event) {
+			editor.execute(new SetColliderCommand(editor.selected, { type: this.getValue() }));
+			this.setValue(null);
+			update();
+		}).setMarginTop('10px'));
+		collidersContainer.add(new UI.Break());
+	}
+
 	function setRowVisibility(object) {
 		// TODO: Fix that
 		/*object = object.rigidbody;
@@ -144,62 +157,22 @@ Sidebar.Physics = function (editor, object) {
 	}
 
 	function update() {
-		collidersContainer.clear();
-		collidersContainer.setDisplay('none');
-
 		let object = editor.selected;
 
 		if (object) {
-			if (object.rigidbody.active !== objectRigidbody.getValue())
-				editor.execute(new SetValueCommand(object.rigidbody, 'active', objectRigidbody.getValue()));
-
 			// TODO: Create SetRigidbodyValueCommand
 			/*if (object.rigidbody.uuid !== undefined && object.rigidbody.uuid !== rigidbodyUUID.getValue())
 				editor.execute(new SetMaterialValueCommand(object.rigidbody, 'uuid', rigidbodyUUID.getValue(), currentMaterialSlot));*/
 		}
 
-		if (object.rigidbody.active && object.rigidbody.colliders.length) {
-			collidersContainer.setDisplay('block');
-			massContainer.setDisplay('block');
-
-			for (let i = 0; i < object.rigidbody.colliders.length; i++) {
-				// TODO: Add position, rotation and scale to rigidbodies
-				(function (object, collider, colliderIndex) {
-					let colliderType = new UI.Select();
-
-					colliderType.setOptions({
-						'Mesh': 'Mesh',
-						'BoxMesh': 'Box Mesh',
-						'SphereMesh': 'Sphere Mesh',
-						'CylinderMesh': 'Cylinder Mesh',
-						'ConeMesh': 'Cone Mesh',
-						'CapsuleMesh': 'Capsule Mesh',
-						'ConvexMesh': 'Convex Mesh',
-						'ConcaveMesh': 'Concave Mesh',
-						'HeightfieldMesh': 'Heightfield Mesh',
-						'Mesh': 'Mesh'
-					});
-					colliderType.onClick(function (event) {
-						event.stopPropagation(); // Avoid panel collapsing
-					});
-					colliderType.onChange(function (event) {
-						editor.execute(new SetColliderCommand(object, { type: this.getValue() }, colliderIndex));
-					});
-
-					collidersContainer.add(new UI.Text('Type').setWidth('90px'));
-					collidersContainer.add(colliderType);
-
-					collidersContainer.add(new UI.Break());
-				})(object, object.rigidbody.colliders[i], i)
-			}
-		}
+		refreshCollidersList(object);
 	}
 
 	function refreshUI(object) {
 		if (object.rigidbody.uuid !== undefined)
 			rigidbodyUUID.setValue(object.rigidbody.uuid);
 
-		objectRigidbody.setValue(object.rigidbody.active);
+		refreshCollidersList(object);
 
 		objectMass.setValue(object.rigidbody.mass);
 
