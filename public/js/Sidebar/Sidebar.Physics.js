@@ -134,15 +134,17 @@ Sidebar.Physics = function (editor, object) {
 				collidersContainer.add(new UI.Break());
 			}
 		}
-		collidersContainer.add(new UI.Text('Type').setWidth('90px'));
-		collidersContainer.add(new UI.Select().setOptions(meshTypes).onClick(function (event) {
-			event.stopPropagation(); // Avoid panel collapsing
-		}).onChange(function (event) {
-			editor.execute(new SetColliderCommand(editor.selected, { type: this.getValue() }));
-			this.setValue(null);
-			update();
-		}).setMarginTop('10px'));
-		collidersContainer.add(new UI.Break());
+		else {
+			collidersContainer.add(new UI.Text('Type').setWidth('90px'));
+			collidersContainer.add(new UI.Select().setOptions(meshTypes).onClick(function (event) {
+				event.stopPropagation(); // Avoid panel collapsing
+			}).onChange(function (event) {
+				editor.execute(new SetColliderCommand(editor.selected, { type: this.getValue() }));
+				this.setValue(null);
+				update();
+			}).setMarginTop('10px'));
+			collidersContainer.add(new UI.Break());
+		}
 	}
 
 	function setRowVisibility(object) {

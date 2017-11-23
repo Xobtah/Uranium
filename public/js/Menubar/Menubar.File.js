@@ -234,9 +234,11 @@ Menubar.File = function (editor) {
 
 		//
 
-		var manager = new THREE.LoadingManager(() => { save(zip.generate({ type: 'blob' }), 'download.zip'); });
+		var manager = new THREE.LoadingManager(() => save(zip.generate({ type: 'blob' }), 'download.zip'));
 
 		var loader = new THREE.FileLoader(manager);
+
+		// index.html
 		loader.load('js/libs/app/index.html', (content) => {
 			var includes = [];
 
@@ -250,8 +252,40 @@ Menubar.File = function (editor) {
 
 			zip.file('index.html', content);
 		});
+
+		// Application
+		loader.load('js/libs/app/app.js', (content) => zip.file(editor.scene.name + '.js', content));
+
+		// package.json
+		loader.load('js/libs/app/package.json', (content) => {
+			content = JSON.parse(content);
+			content.name = editor.scene.name;
+			zip.file('package.json', JSON.stringify(content));
+		});
+
+		// Electron main.js
+		loader.load('js/libs/app/electron/main.js', (content) => { zip.file('electron/main.js', content); });
+
+		// APP.Player
 		loader.load('js/libs/app.js', (content) => { zip.file('js/app.js', content); });
-		loader.load('../build/three.min.js', (content) => zip.file( 'js/three.min.js', content));
+
+		// Three
+		loader.load('node_modules/three/build/three.min.js', (content) => zip.file('js/three.min.js', content));
+
+		let libz = [
+			// Four.js
+			'js/libs/Four.js/Object3D.js',
+			'js/libs/Four.js/ObjectLoader.js',
+			'js/libs/Four.js/Rigidbody.js',
+			// Physijs
+			'js/libs/Physijs/physi.js',
+			'js/libs/Physijs/physijs_worker.js',
+			'js/libs/Physijs/examples/js/ammo.js'
+		];
+		libz.forEach((e) => loader.load(e, (content) => zip.file(e, content)));
+
+		// Install
+		//loader.load('js/libs/app/Install', (content) => zip.file('Install', content, { binary: true }));
 
 		if (vr) {
 			loader.load('../examples/js/controls/VRControls.js', (content) => zip.file('js/VRControls.js', content));

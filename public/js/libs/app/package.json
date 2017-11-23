@@ -1,0 +1,14 @@
+{
+  "name": "app",
+  "main": "electron/main.js",
+  "version": "1.0.0",
+  "description": "An Uranium 235 application.",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.7.9",
+    "express": "^4.16.2",
+    "path": "^0.12.7"
+  }
+}

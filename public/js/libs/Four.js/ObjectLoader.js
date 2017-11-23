@@ -134,6 +134,10 @@ THREE.ObjectLoader.prototype.parseObject = function () {
                     if (rigidbody && rigidbody.colliders.length) {
                         object = new Physijs[rigidbody.colliders[0].type](geometry, material, rigidbody.mass);
                         object.rigidbody = rigidbody;
+                        /*rigidbody.colliders.forEach((collider, array, index) => {
+                            if (index)
+                                object.add(new Physijs[collider.type](geometry, new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true }), rigidbody.mass));
+                        });*/
                     }
                     else
                         object = new THREE.Mesh(geometry, material);
